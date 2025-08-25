@@ -1,3 +1,5 @@
+import clsx from 'clsx';
+
 import type { ButtonProps } from '@shared/ui/Button/model';
 import Icon from '@shared/ui/Icon';
 
@@ -13,16 +15,14 @@ export const Button: React.FC<ButtonProps> = ({
   className = '',
   ...props
 }) => {
-  const buttonClasses = [
+  const buttonClasses = clsx([
     'button',
     `button--${variant}`,
     `button--${size}`,
     isLoading && 'button--loading',
     disabled && 'button--disabled',
     className,
-  ]
-    .filter(Boolean)
-    .join(' ');
+  ]);
 
   return (
     <button
@@ -32,12 +32,12 @@ export const Button: React.FC<ButtonProps> = ({
       {...props}
     >
       {isLoading && <span className="button__loader" />}
-      {icon && (
+      {!isLoading && icon && (
         <span className="button__icon button__icon">
           <Icon name={icon} />
         </span>
       )}
-      <span className="button__content">{children}</span>
+      {!isLoading && <span className="button__content">{children}</span>}
     </button>
   );
 };

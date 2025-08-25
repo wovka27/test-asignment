@@ -4,7 +4,7 @@ import Icon from '@shared/ui/Icon';
 export const MainPage = () => {
   return (
     <>
-      <div style={{ backgroundColor: '#000', display: 'flex' }}>
+      <div style={{ display: 'flex' }}>
         <Icon name="chevron" />
         <Icon name="contractor" />
         <Icon name="logo" />
@@ -21,7 +21,7 @@ export const MainPage = () => {
         <Icon name="x" />
       </div>
       <div>
-        <Button>HUI</Button>
+        <Button isLoading>HUI</Button>
       </div>
     </>
   );
