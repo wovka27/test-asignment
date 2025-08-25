@@ -36,6 +36,7 @@ export class HttpClient implements IHttpClient {
   constructor(public options: IHttpClientOptions) {
     this.instance = axios.create({ withCredentials: true, ...options });
 
+    this.initializeRequestInterceptor();
     this.initializeResponseInterceptor();
   }
 
@@ -55,7 +56,13 @@ export class HttpClient implements IHttpClient {
     await this.instance.post(this.options.refreshURL);
   }
 
-  private initializeResponseInterceptor() {
+  private initializeRequestInterceptor(): void {
+    this.instance.interceptors.request.use((config) => {
+      return config;
+    });
+  }
+
+  private initializeResponseInterceptor(): void {
     this.instance.interceptors.response.use(
       (response) => response,
       async (error: AxiosError) => {

@@ -4,6 +4,5 @@ export type ExtendedRouteObject = RouteObject & {
   meta?: {
     title?: string;
     requiresAuth?: boolean;
-    roles?: string[];
   };
 };
