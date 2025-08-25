@@ -10,4 +10,4 @@ const routes: ExtendedRouteObject[] = [
   },
 ];
 
-export const authorizedRoutes = routes;
+export const authorizedRoutes: typeof routes = routes;

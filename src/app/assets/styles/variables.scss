@@ -9,23 +9,11 @@
 
   --color-red: #ff5500;
 
-  --gradient: linear-gradient(45deg, var(--color-dark-15) 64%, var(--color-accent) 136%);
-
   --border: #{rem(1)} solid var(--color-dark-15);
 
   --shadow: 0 0 0 #{rem(3)} #191919;
 
-  --font-family-base: "PT-Root-UI", sans-serif;
-
-  --container-width: #{rem(1440)};
-  --container-padding-x: #{rem(80)};
+  --font-family-base: "Poppins", sans-serif;
 
   --transition-duration: 0.2s;
-
-  --100vw: calc(100vw - var(--scrollbar-width));
-
-  @include laptop {
-    --container-width: #{rem(960)};
-    --container-padding-x: #{rem(54)};
-  }
 }
