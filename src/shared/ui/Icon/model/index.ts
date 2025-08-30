@@ -1,6 +1,7 @@
 export type IconNameType =
   | 'check'
   | 'x'
+  | 'add'
   | 'add_photo'
   | 'inventory'
   | 'chevron'
@@ -10,8 +11,11 @@ export type IconNameType =
   | 'account'
   | 'logout'
   | 'contractor'
-  | 'portfolio'
+  | 'search'
+  | 'company'
   | 'settings'
+  | 'chevron_down'
+  | 'chevron_up'
   | 'logo';
 
 export interface IconProps extends React.SVGProps<SVGSVGElement> {

@@ -1,0 +1,17 @@
+.main-layout {
+  height: 100vh;
+  display: grid;
+  grid-template-columns: max-content 1fr;
+}
+
+.main-layout__inner {
+  height: 100%;
+}
+
+.main-layout__content {
+  padding: rem(32) 0;
+  overflow: auto;
+  min-height: 0;
+  height: 100%;
+  @include hide-scroll();
+}

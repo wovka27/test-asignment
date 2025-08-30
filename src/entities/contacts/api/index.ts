@@ -2,12 +2,12 @@ import type { ContactRequestData, IContact } from '@entities/contacts/model';
 
 import { client } from '@shared/api/client.ts';
 
-const getEndpoint = (id: string) => `/contacts/${id}`;
+const endpoint = 'contacts/16';
 
-export const fetchGetContact = (id: string) => {
-  return client.get<IContact>(getEndpoint(id));
+export const fetchGetContact = () => {
+  return client.get<IContact>(endpoint);
 };
 
-export const fetchUpdateContact = (id: string, data: ContactRequestData) => {
-  return client.patch<IContact>(getEndpoint(id), data);
+export const fetchUpdateContact = (data: ContactRequestData) => {
+  return client.patch<IContact>(endpoint, data);
 };

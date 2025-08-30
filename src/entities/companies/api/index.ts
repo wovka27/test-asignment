@@ -1,21 +1,30 @@
 import type { CompanyRequestData, ICompany } from '@entities/companies/model';
+import mock_companies from '@entities/companies/model/mocks/mock_companies.json';
 
 import { client } from '@shared/api/client.ts';
 
-const getEndpoint = (id: string) => `/companies/${id}`;
+const endpoint = 'companies/12';
 
-export const fetchGetCompany = (id: string) => {
-  return client.get<ICompany>(getEndpoint(id));
+export const fetchGetCompanies = () => {
+  return mock_companies;
 };
 
-export const fetchUpdateCompany = (id: string, data: CompanyRequestData) => {
-  return client.patch<ICompany>(getEndpoint(id), data);
+export const fetchGetCompany = () => {
+  return client.get<ICompany>(endpoint);
 };
 
-export const fetchDeleteCompany = (id: string) => {
-  return client.delete(getEndpoint(id));
+export const fetchUpdateCompany = (data: Partial<CompanyRequestData>) => {
+  return client.patch<ICompany>(endpoint, data);
 };
 
-export const fetchAddCompanyImage = (id: string, data: FormData) => {
-  return client.post<ICompany['photos']>(`${getEndpoint(id)}/image`, data);
+export const fetchDeleteCompany = () => {
+  return client.delete(endpoint);
+};
+
+export const fetchAddCompanyImage = (data: FormData) => {
+  return client.post<ICompany['photos']>(`${endpoint}/image`, data);
+};
+
+export const fetchDeleteCompanyImage = (name: string) => {
+  return client.delete(`${endpoint}/image/${name}`);
 };

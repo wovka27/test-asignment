@@ -1,32 +1,12 @@
-import axios, {
-  type AxiosError,
-  type AxiosInstance,
-  type AxiosRequestConfig,
-  type AxiosResponse,
-  type CreateAxiosDefaults,
-  type InternalAxiosRequestConfig,
-} from 'axios';
+import axios, { type AxiosError, type AxiosInstance, type AxiosRequestConfig } from 'axios';
 
-export interface IHttpClient {
-  get<T>(url: string, config?: AxiosRequestConfig): Promise<AxiosResponse<T>>;
-  post<T>(url: string, data?: unknown, config?: AxiosRequestConfig): Promise<AxiosResponse<T>>;
-  put<T>(url: string, data?: unknown, config?: AxiosRequestConfig): Promise<AxiosResponse<T>>;
-  patch<T>(url: string, data?: unknown, config?: AxiosRequestConfig): Promise<AxiosResponse<T>>;
-  delete<T>(url: string, config?: AxiosRequestConfig): Promise<AxiosResponse<T>>;
-}
-
-export interface IHttpClientOptions extends CreateAxiosDefaults {
-  refreshURL?: string;
-}
-
-export interface IHttpClientFailedQueue {
-  resolve: () => void;
-  reject: <E>(err: E) => void;
-}
-
-export interface IHttpAxiosRequestConfig extends InternalAxiosRequestConfig {
-  _retry?: boolean;
-}
+import CookieHelper from '@shared/lib/Cookie';
+import type {
+  IHttpAxiosRequestConfig,
+  IHttpClient,
+  IHttpClientFailedQueue,
+  IHttpClientOptions,
+} from '@shared/lib/HttpClient/model';
 
 export class HttpClient implements IHttpClient {
   private readonly instance: AxiosInstance;
@@ -58,13 +38,35 @@ export class HttpClient implements IHttpClient {
 
   private initializeRequestInterceptor(): void {
     this.instance.interceptors.request.use((config) => {
+      const token = CookieHelper.get('token');
+
+      this.options.setAuthenticated?.(!!token);
+
+      if (token) {
+        config.headers.Authorization = token;
+      }
+
       return config;
     });
   }
 
   private initializeResponseInterceptor(): void {
     this.instance.interceptors.response.use(
-      (response) => response,
+      (response) => {
+        const token = response.headers['authorization'];
+
+        this.options.setAuthenticated?.(!!token);
+
+        if (token) {
+          CookieHelper.set('token', token, {
+            maxAge: 3600,
+            secure: true,
+            sameSite: 'Strict',
+          });
+        }
+
+        return response;
+      },
       async (error: AxiosError) => {
         const originalRequest: IHttpAxiosRequestConfig | undefined = error.config;
 
@@ -99,23 +101,23 @@ export class HttpClient implements IHttpClient {
     );
   }
 
-  public get<T>(url: string, config?: InternalAxiosRequestConfig) {
+  public get<T>(url: string, config?: AxiosRequestConfig) {
     return this.instance.get<T>(url, config);
   }
 
-  public post<T>(url: string, data?: unknown, config?: InternalAxiosRequestConfig) {
+  public post<T>(url: string, data?: unknown, config?: AxiosRequestConfig) {
     return this.instance.post<T>(url, data, config);
   }
 
-  public put<T>(url: string, data?: unknown, config?: InternalAxiosRequestConfig) {
+  public put<T>(url: string, data?: unknown, config?: AxiosRequestConfig) {
     return this.instance.put<T>(url, data, config);
   }
 
-  public patch<T>(url: string, data?: unknown, config?: InternalAxiosRequestConfig) {
+  public patch<T>(url: string, data?: unknown, config?: AxiosRequestConfig) {
     return this.instance.patch<T>(url, data, config);
   }
 
-  public delete<T>(url: string, config?: InternalAxiosRequestConfig) {
+  public delete<T>(url: string, config?: AxiosRequestConfig) {
     return this.instance.delete<T>(url, config);
   }
 }

@@ -10,13 +10,12 @@ export default {
   arrowParens: 'always',
   endOfLine: 'lf',
 
-  // Плагин для сортировки импортов
   plugins: ['@trivago/prettier-plugin-sort-imports'],
 
-  // Правила сортировки
   importOrder: [
-    '^react$', // React
-    '^react-dom/(.*)$', // ReactDOM
+    '^react$',
+    '^react-dom',
+    '^react-dom/(.*)$',
     '<THIRD_PARTY_MODULES>',
     '^@app/(.*)$',
     '^@pages/(.*)$',

@@ -1,0 +1,7 @@
+.form-field-generator {
+  &__group {
+    display: flex;
+    align-items: center;
+    column-gap: rem(12);
+  }
+}

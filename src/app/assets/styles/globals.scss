@@ -1,6 +1,7 @@
 @use "helpers/index" as *;
 
 html {
+  height: 100%;
   scroll-behavior: smooth;
 }
 
@@ -8,9 +9,9 @@ body {
   position: relative;
   font-family: var(--font-family-base);
   font-size: rem(14);
-  letter-spacing: 0;
+  letter-spacing: 0.3px;
   color: var(--color-dark-blue);
-  background-color: var(--color-light);
+  background-color: var(--color-light-body);
 }
 
 main {
@@ -90,12 +91,6 @@ a {
   &[class] {
     text-decoration: none;
   }
-}
-
-:focus-visible {
-  outline: rem(2) dashed var(--color-dark-blue);
-  outline-offset: rem(4);
-  transition-duration: 0s !important;
 }
 
 a,

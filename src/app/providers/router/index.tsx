@@ -1,9 +1,8 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
-import { authorizedRoutes } from '@app/providers/router/routes/authorized-routes';
-import { unauthorizedRoutes } from '@app/providers/router/routes/unauthorized-routes';
+import routes from '@app/providers/router/routes';
 
-const router = createBrowserRouter([...authorizedRoutes, ...unauthorizedRoutes]);
+const router = createBrowserRouter(routes);
 
 export const AppRouter = () => {
   return <RouterProvider router={router} />;

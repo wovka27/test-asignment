@@ -1,0 +1,4 @@
+.grab-scroll-container {
+  overflow-x: auto;
+  @include hide-scroll();
+}

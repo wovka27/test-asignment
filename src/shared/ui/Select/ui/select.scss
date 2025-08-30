@@ -1,0 +1,95 @@
+.select {
+  position: relative;
+
+  &__control {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: rem(10) rem(12);
+    border: 1px solid #ccc;
+    border-radius: var(--border-radius-8);
+    cursor: pointer;
+    background: var(--color-light);
+    transition-duration: var(--transition-duration);
+
+    &:hover {
+      border-color: #666;
+    }
+
+    &.open,
+    &:focus,
+    &:focus-visible,
+    &:active {
+      border-color: #2d8cf0;
+      box-shadow: 0 0 0 2px rgba(45, 140, 240, 0.2);
+    }
+  }
+
+  &__value {
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #333;
+  }
+
+  &__arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-left: 8px;
+  }
+
+  &__dropdown {
+    @include hide-scroll();
+
+    position: absolute;
+    left: 0;
+    right: 0;
+    box-shadow: 0 rem(2) rem(4) 0 rgba(0, 0, 0, 0.16), 0 rem(-1) rem(4) 0 rgba(0, 0, 0, 0.04);
+    background: var(--color-light);
+    border-radius: var(--border-radius-8);
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 10;
+    transition-duration: var(--transition-duration);
+    transition-timing-function: ease;
+    overflow-y: auto;
+
+
+    &.bottom {
+      top: calc(100% + 4px);
+    }
+
+    &.top {
+      bottom: calc(100% + 4px);
+    }
+  }
+
+  &__option {
+    padding: rem(16) rem(12);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: rem(12);
+
+    &:hover {
+      background: #0000000D;
+    }
+
+
+    &.selected {
+      background: #0000000D;
+    }
+  }
+
+  &__checkbox {
+    margin-right: 6px;
+  }
+
+  &.disabled {
+    opacity: 0.6;
+    pointer-events: none;
+  }
+}
