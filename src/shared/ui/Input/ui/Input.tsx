@@ -2,7 +2,7 @@ import clsx from 'clsx';
 
 import type { InputProps } from '@shared/ui/Input/model';
 
-import './Input.scss';
+import './input.scss';
 
 export const Input: InputProps = ({
   size = 'md',
