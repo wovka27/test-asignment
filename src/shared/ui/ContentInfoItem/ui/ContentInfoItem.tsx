@@ -25,7 +25,10 @@ export const ContentInfoItem: CustomContentInfoItemProps = ({
   return (
     <div
       style={style}
-      className={clsx('content-info-item', { 'content-info-item--inline': inline })}
+      className={clsx('content-info-item', {
+        'content-info-item--inline': inline,
+        'is-form': isFormField,
+      })}
     >
       <Label className="content-info-item__label" htmlFor={htmlFor}>
         {label}

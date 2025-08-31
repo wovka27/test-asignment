@@ -2,16 +2,14 @@ import { useState } from 'react';
 
 import Checkbox from '@shared/ui/Checkbox';
 import ContentInfoItem from '@shared/ui/ContentInfoItem';
-import type { FormField, FormFieldGeneratorType } from '@shared/ui/FormFieldGenerator/model';
+import type { FormFieldGeneratorType } from '@shared/ui/FormFieldGenerator/model';
 import Input from '@shared/ui/Input';
 import Select from '@shared/ui/Select';
 
 import './form-field-generator.scss';
 
 export const FormFieldGenerator: FormFieldGeneratorType = ({ data }) => {
-  const [formValues, setFormValues] = useState<Record<string | number | readonly string[]>>(
-    Object.create(null)
-  );
+  const [formValues, setFormValues] = useState<unknown>(Object.create(null));
 
   function handleChange<T>(name: string, value: T) {
     setFormValues((prev) => ({ ...prev, [name]: value }));
@@ -38,14 +36,15 @@ export const FormFieldGenerator: FormFieldGeneratorType = ({ data }) => {
             key={item.name}
             inline={item.inline}
             label={item.label}
+            style={item.style}
           >
             <Input
               id={item.name}
               name={item.name}
               type={item.type}
-              {...item.props}
               value={formValues[item.name]}
               onChange={(event) => handleChange(item.name, event.target.value)}
+              {...item.props}
             />
           </ContentInfoItem>
         );
@@ -61,9 +60,9 @@ export const FormFieldGenerator: FormFieldGeneratorType = ({ data }) => {
             <Checkbox
               id={item.name}
               name={item.name}
-              {...item.props}
               value={formValues[item.name]}
               onChange={(v) => handleChange(item.name, v)}
+              {...item.props}
             />
           </ContentInfoItem>
         );
@@ -79,9 +78,9 @@ export const FormFieldGenerator: FormFieldGeneratorType = ({ data }) => {
             <Select
               id={item.name}
               name={item.name}
-              {...item.props}
               value={formValues[item.name]}
               onChange={(v) => handleChange(item.name, v)}
+              {...item.props}
             >
               {item.options.map((option) => (
                 <Select.Item key={option.value} value={option.value}>

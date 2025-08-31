@@ -1,8 +1,16 @@
 @use "helpers" as *;
 
 .container {
+  height: 100%;
   width: rem(640);
   margin-inline: auto;
+}
+
+.container-flex-column {
+  display: flex;
+  flex-direction: column;
+  gap: rem(16);
+  padding: 0 0 rem(32) 0;
 }
 
 .visually-hidden {

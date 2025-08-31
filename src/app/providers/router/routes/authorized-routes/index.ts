@@ -1,11 +1,12 @@
 import type { RouteObject } from 'react-router-dom';
 
-import CompanyDetailPage from '@pages/CompanyDetailPage';
 import CompanyDetailsPage from '@pages/CompanyDetailsPage';
 import { MainPage } from '@pages/MainPage';
 import SettingsPage from '@pages/SettingsPage';
 
 import { privateLoader } from '@features/auth/ui/privateLoader';
+import EntityList from '@features/entity-list';
+
 import { detailsLoader } from '@entities/entityDetails/api/detailsLoader.ts';
 
 const routes: RouteObject[] = [
@@ -33,7 +34,7 @@ const routes: RouteObject[] = [
     children: [
       {
         path: 'companies',
-        Component: CompanyDetailPage,
+        Component: EntityList,
         handle: {
           layout: 'main',
           entity_type: 'organization',
@@ -50,7 +51,7 @@ const routes: RouteObject[] = [
       },
       {
         path: 'contractors',
-        Component: CompanyDetailPage,
+        Component: EntityList,
         handle: {
           layout: 'main',
           entity_type: 'contractor',
@@ -67,8 +68,7 @@ const routes: RouteObject[] = [
       },
       {
         path: 'clients',
-        Component: CompanyDetailPage,
-        loader: privateLoader,
+        Component: EntityList,
         handle: {
           layout: 'main',
           entity_type: 'client',

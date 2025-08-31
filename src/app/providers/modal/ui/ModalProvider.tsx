@@ -50,7 +50,9 @@ const ModalProvider: React.FC<PropsWithChildren> = ({ children }) => {
 
   const onClick: React.MouseEventHandler<HTMLDialogElement> = (e) => {
     const dialog = dialogRef.current;
+
     if (!dialog) return;
+
     const rect = dialog.getBoundingClientRect();
     const isBackdropClick =
       e.clientX < rect.left ||

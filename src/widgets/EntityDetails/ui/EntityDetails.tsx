@@ -22,20 +22,26 @@ export const EntityDetails: EntityDetailsProps = ({
       <ContentRow hideActions={hideActions} key={item.titleText + item.id} {...item} />
     ));
 
+  const PhotosData = () =>
+    photosData ? (
+      <Photos
+        data={photosData || []}
+        title={'Photos'}
+        onRemove={photosOnRemove!}
+        onUpload={photosOnUpload!}
+      />
+    ) : null;
+
+  const IsHeader = () =>
+    isHeader ? (
+      <Header title={headerTitle!} onRemove={headerOnRemove!} onEdit={headerOnEdit!} />
+    ) : null;
+
   return (
     <div className="entity-details container">
-      {isHeader && (
-        <Header title={headerTitle!} onRemove={headerOnRemove!} onEdit={headerOnEdit!} />
-      )}
+      <IsHeader />
       <Items />
-      {photosData && (
-        <Photos
-          data={photosData || []}
-          title={'Photos'}
-          onRemove={photosOnRemove!}
-          onUpload={photosOnUpload!}
-        />
-      )}
+      <PhotosData />
     </div>
   );
 };

@@ -49,11 +49,13 @@ const fieldsConfig: FormField[] = [
         name: 'number',
         label: 'Agreement number:',
         props: {
-          style: { maxWidth: '178px' },
           placeholder: 'fdhgfdj',
         },
       },
       {
+        style: {
+          flex: '1',
+        },
         type: 'date',
         name: 'date',
         inline: true,

@@ -11,7 +11,7 @@ export type ActionType = {
 
 type ISectionContainer = React.PropsWithChildren &
   React.HTMLProps<HTMLDivElement> & {
-    titleText: string;
+    titleText?: string;
     actions?: ActionType[];
     isForm?: boolean;
   };

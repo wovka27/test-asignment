@@ -64,6 +64,9 @@ export const AsideMenu: React.FC = () => {
               </Button>
             ))}
           </div>
+          <div className="aside-menu__content-footer">
+            <p>All Funeral Services &copy; 2015&ndash;{new Date().getFullYear()}</p>
+          </div>
         </div>
       </div>
     </aside>

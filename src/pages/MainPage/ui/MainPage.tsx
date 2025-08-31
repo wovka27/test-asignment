@@ -4,7 +4,7 @@ import EntityDetails from '@widgets/EntityDetails';
 
 export const MainPage = () => {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', height: '100%' }}>
+    <div className="container-flex-column">
       <EntityDetails data={data} isHeader={false} hideActions />
     </div>
   );
