@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import type { ContentRowProps } from '@features/content-block/model';
 
 import ContentInfoItem from '@shared/ui/ContentInfoItem';
@@ -9,11 +11,28 @@ export const ContentRow: ContentRowProps = ({
   onEdit,
   data,
   id,
+  EntityForm,
+  componentFormRegistryKey,
+  initialState,
   hideActions = false,
 }) => {
-  if (!data.length) return;
+  const [state, setState] = useState<boolean>(false);
 
-  const btn: ActionType[] = [{ icon: 'edit', onClick: onEdit, title: 'Edit' }];
+  const handleClick = () => {
+    if (!componentFormRegistryKey && !EntityForm && !state) {
+      onEdit?.();
+      return;
+    }
+    setState((pre) => !pre);
+  };
+
+  const btn: ActionType[] = [{ icon: 'edit', onClick: handleClick, title: 'Edit' }];
+
+  if (!data.length) return null;
+
+  if (componentFormRegistryKey && EntityForm && state) {
+    return <EntityForm setState={setState} initialState={initialState} />;
+  }
 
   return (
     <SectionContainer id={id} titleText={titleText} actions={!hideActions ? btn : undefined}>

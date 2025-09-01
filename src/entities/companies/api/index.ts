@@ -22,7 +22,7 @@ export const fetchDeleteCompany = () => {
 };
 
 export const fetchAddCompanyImage = (data: FormData) => {
-  return client.post<ICompany['photos']>(`${endpoint}/image`, data);
+  return client.post<ICompany['photos']>(`${endpoint}/image`, data, { responseType: 'formdata' });
 };
 
 export const fetchDeleteCompanyImage = (name: string) => {

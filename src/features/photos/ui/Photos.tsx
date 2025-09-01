@@ -1,3 +1,5 @@
+import { useRef, useState } from 'react';
+
 import clsx from 'clsx';
 
 import GrabScrollContainer from '@features/grab-scroll-container';
@@ -9,14 +11,39 @@ import SectionContainer from '@shared/ui/SectionContainer';
 import './photos.scss';
 
 export const Photos: PhotosProps = ({ title, onUpload, data, onRemove }) => {
+  const [photos, setPhotos] = useState<typeof data>(data);
+  const inputRef = useRef<HTMLInputElement | null>(null);
+
+  const onClick = () => inputRef.current?.click();
+
+  const onFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+
+    if (file) {
+      const formData = new FormData();
+      formData.append('file', file);
+
+      onUpload(formData).then((res) => {
+        setPhotos((prevState) => [...prevState, JSON.parse(res.data)])
+      });
+    }
+  };
   return (
     <SectionContainer
+      isForm
       titleText={title}
-      actions={[{ title: 'Add', icon: 'add_photo', onClick: onUpload }]}
+      actions={[{ title: 'Add', icon: 'add_photo', onClick }]}
     >
+      <input
+        ref={inputRef}
+        className="visually-hidden"
+        type="file"
+        name="file"
+        onChange={onFileSelect}
+      />
       <GrabScrollContainer>
         <div className={clsx('photos__list')}>
-          {data.map((i) => (
+          {photos.map((i) => (
             <ImagePreview
               src={i.filepath}
               key={i.filepath}

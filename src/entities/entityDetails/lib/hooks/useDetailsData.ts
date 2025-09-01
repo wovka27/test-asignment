@@ -6,9 +6,12 @@ import type { IEntityDetailsLoaderResponse } from '@entities/entityDetails/model
 export const useDetailsData = <T>(
   cb: (
     payload: IEntityDetailsLoaderResponse<T>['payload']
-  ) => Parameters<typeof detailsDataTransformer>[number]
+  ) => Parameters<typeof detailsDataTransformer>[0],
+  getInitialState?: (
+    payload: IEntityDetailsLoaderResponse<T>['payload']
+  ) => Record<string, Record<string, string | string[]>>
 ) => {
   const { payload } = useLoaderData<IEntityDetailsLoaderResponse<T>>();
 
-  return { payload, ...detailsDataTransformer(cb(payload)) };
+  return { payload, ...detailsDataTransformer(cb(payload), getInitialState?.(payload)) };
 };

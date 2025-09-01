@@ -15,15 +15,25 @@ import type { SelectItemProps } from '@shared/ui/Select/model';
 
 import './select.scss';
 
+type Value = string | string[];
+
 interface SelectContextValue {
   multiple: boolean;
-  value: string | string[];
+  value: Value;
   onSelect: (val: string) => void;
 }
 
 const SelectContext = createContext<SelectContextValue | null>(null);
 
-interface SelectProps extends React.HTMLProps<HTMLSelectElement> {
+interface SelectProps
+  extends Omit<
+    React.SelectHTMLAttributes<HTMLSelectElement>,
+    'onChange' | 'value' | 'defaultValue'
+  > {
+  value?: string | string[];
+  defaultValue?: string | string[];
+  onChange?: (val: string | string[]) => void;
+  onNativeChange?: React.ChangeEventHandler<HTMLSelectElement>;
   dropdownHeight?: number;
 }
 
@@ -34,31 +44,49 @@ export const Select: React.FC<PropsWithChildren<SelectProps>> & {
   id,
   defaultValue,
   onChange,
+  onNativeChange,
   multiple = false,
   placeholder = 'Select...',
   children,
   dropdownHeight = 300,
+  name,
   ...otherProps
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [dropUp, setDropUp] = useState(false);
-  const [internalValue, setInternalValue] = useState<string | string[]>(
-    value ?? defaultValue ?? (multiple ? [] : '')
-  );
-  const ref = useRef<HTMLDivElement>(null);
 
   const isControlled = value !== undefined;
-  const selectedValue = isControlled ? value : internalValue;
+
+  const [internalValue, setInternalValue] = useState<Value>(() => {
+    if (value !== undefined) return value;
+    if (defaultValue !== undefined) return defaultValue;
+    return multiple ? [] : '';
+  });
+
+  const selectedValue: Value = isControlled ? (value as Value) : internalValue;
+
+  const ref = useRef<HTMLDivElement>(null);
+
+  const nativeSelectValue = multiple
+    ? Array.isArray(selectedValue)
+      ? selectedValue.map(String)
+      : []
+    : typeof selectedValue === 'string'
+      ? selectedValue
+      : String(selectedValue ?? '');
 
   const handleSelect = (val: string) => {
+    const valStr = String(val);
+
     if (multiple) {
-      const arr = Array.isArray(selectedValue) ? selectedValue : [];
-      const newValue = arr.includes(val) ? arr.filter((v) => v !== val) : [...arr, val];
+      const arr = Array.isArray(selectedValue) ? selectedValue.map(String) : [];
+      const exists = arr.includes(valStr);
+      const newValue = exists ? arr.filter((v) => v !== valStr) : [...arr, valStr];
       if (!isControlled) setInternalValue(newValue);
       onChange?.(newValue);
     } else {
-      if (!isControlled) setInternalValue(val);
-      onChange?.(val);
+      if (!isControlled) setInternalValue(valStr);
+      onChange?.(valStr);
       setIsOpen(false);
     }
   };
@@ -78,31 +106,28 @@ export const Select: React.FC<PropsWithChildren<SelectProps>> & {
   };
 
   const renderLabel = () => {
+    const childrenArray = React.Children.toArray(children).filter(
+      React.isValidElement
+    ) as React.ReactElement[];
+
     if (multiple && Array.isArray(selectedValue) && selectedValue.length) {
       return selectedValue
         .map((val) => {
-          const opt = React.Children.toArray(children).find((child) => child.props.value === val);
+          const opt = childrenArray.find((child) => String(child.props.value) === String(val));
           return opt ? opt.props.children : val;
         })
         .join(', ');
     }
+
     if (!multiple && typeof selectedValue === 'string' && selectedValue) {
-      const opt = React.Children.toArray(children).find(
-        (child) => child.props.value === selectedValue
+      const opt = childrenArray.find(
+        (child) => String(child.props!.value) === String(selectedValue)
       );
-      return opt ? opt.props.children : selectedValue;
+      return opt ? opt.props!.children : selectedValue;
     }
+
     return placeholder;
   };
-
-  const isSelected = (val: string | number) => {
-    if (multiple) {
-      return Array.isArray(selectedValue) && selectedValue.includes(String(val));
-    }
-    return selectedValue === String(val);
-  };
-
-  const openDropDown = () => setIsOpen((p) => !p);
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -135,14 +160,31 @@ export const Select: React.FC<PropsWithChildren<SelectProps>> & {
     };
   }, [isOpen, dropdownHeight]);
 
+  const openDropDown = () => setIsOpen((p) => !p);
+
+  const handleNativeChange: React.ChangeEventHandler<HTMLSelectElement> = (e) => {
+    if (multiple) {
+      const vals = Array.from(e.target.selectedOptions).map((o) => o.value);
+      console.log(vals);
+      if (!isControlled) setInternalValue(vals);
+      onChange?.(vals);
+    } else {
+      const v = e.target.value;
+      if (!isControlled) setInternalValue(v);
+      onChange?.(v);
+    }
+
+    onNativeChange?.(e);
+  };
+
   return (
-    <div id={id} className="select" ref={ref}>
+    <div id={id ? `${id}-root` : undefined} className="select" ref={ref}>
       <div
         tabIndex={0}
         role="combobox"
         aria-haspopup="listbox"
         aria-expanded={isOpen}
-        aria-controls="select-dropdown"
+        aria-controls={id ? `${id}-dropdown` : 'select-dropdown'}
         className={clsx('select__control', { open: isOpen })}
         onClick={openDropDown}
       >
@@ -153,34 +195,24 @@ export const Select: React.FC<PropsWithChildren<SelectProps>> & {
       </div>
 
       <select
-        id={id}
-        name={otherProps.name}
+        id={id ? `${id}-native` : undefined}
+        name={name}
         style={{ display: 'none' }}
         multiple={multiple}
-        value={value}
-        onChange={(e) => {
-          console.log(e.target.selectedOptions);
-          if (multiple) {
-            const vals = Array.from((e.target as HTMLSelectElement).selectedOptions).map(
-              (o) => o.value
-            );
-            if (!isControlled) setInternalValue(vals);
-            onChange?.(vals);
-          } else {
-            const v = (e.target as HTMLSelectElement).value;
-            if (!isControlled) setInternalValue(v);
-            onChange?.(v);
-          }
-        }}
+        value={nativeSelectValue}
+        onChange={handleNativeChange}
+        {...otherProps}
       >
-        {React.Children.toArray(children).map((child) => {
-          const childVal = String(child.props.value);
-          return (
-            <option key={childVal} value={childVal}>
-              {child.props.children ?? childVal}
-            </option>
-          );
-        })}
+        {React.Children.toArray(children)
+          .filter(React.isValidElement)
+          .map((child) => {
+            const childVal = String((child as React.ReactElement).props!.value);
+            return (
+              <option key={childVal} value={childVal}>
+                {(child as React.ReactElement).props?.children ?? childVal}
+              </option>
+            );
+          })}
       </select>
 
       {isOpen && (
@@ -193,7 +225,7 @@ export const Select: React.FC<PropsWithChildren<SelectProps>> & {
         >
           <div
             role="listbox"
-            id="select-dropdown"
+            id={id ? `${id}-dropdown` : 'select-dropdown'}
             aria-multiselectable={multiple}
             className={clsx('select__dropdown', { top: dropUp, bottom: !dropUp })}
             style={{ maxHeight: dropdownHeight }}
@@ -216,15 +248,25 @@ const SelectItem: React.FC<SelectItemProps> = ({ value, children }) => {
   const { multiple, value: selected, onSelect } = ctx;
 
   const isSelected = multiple
-    ? Array.isArray(selected) && selected.includes(value)
-    : selected === value;
+    ? Array.isArray(selected) && selected.map(String).includes(String(value))
+    : String(selected) === String(value);
 
   return (
     <div
       role="option"
       aria-selected={isSelected}
       className={clsx('select__option', { selected: isSelected })}
-      onClick={() => onSelect(value)}
+      onClick={(e) => {
+        e.preventDefault();
+        onSelect(String(value));
+      }}
+      tabIndex={0}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          onSelect(String(value));
+        }
+      }}
     >
       {multiple && <Checkbox checked={isSelected} readOnly className="select__checkbox" />}
       {children}

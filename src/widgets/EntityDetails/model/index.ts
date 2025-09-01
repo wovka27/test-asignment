@@ -10,8 +10,8 @@ export interface IEntityDetails {
   headerOnRemove?: () => void;
   hideActions?: boolean;
   photosData?: ICompany['photos'];
-  photosOnRemove?: <T>(value: T) => void;
-  photosOnUpload?: () => void;
+  photosOnRemove?: <T>(value: T) => void | Promise<void>;
+  photosOnUpload?: (formData: FormData) => void;
 }
 
 export type EntityDetailsProps = React.FC<IEntityDetails>;

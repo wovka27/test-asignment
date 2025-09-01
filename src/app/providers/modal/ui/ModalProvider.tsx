@@ -12,6 +12,7 @@ import { modalRegistry } from '@app/providers/modal/lib/modalRegistry.ts';
 import type { ModalContextValue, ModalStateConfig } from '@app/providers/modal/model/types';
 
 import BaseModal from '@shared/ui/BaseModal';
+import { formDataToObject } from '@shared/lib/helpers/formDataToObject.ts';
 
 const ModalContext = createContext<ModalContextValue | null>(null);
 
@@ -34,7 +35,7 @@ const ModalProvider: React.FC<PropsWithChildren> = ({ children }) => {
         props: {
           ...config.props,
           onSubmit<T>(data: T) {
-            resolve(data);
+            resolve(formDataToObject<T>(data));
             closeModal();
           },
           onClose() {

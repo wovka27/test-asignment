@@ -9,11 +9,18 @@ import './header.scss';
 
 export const Header: React.FC<{
   title: string;
+  initialState?: { name: string };
   onEdit: (...args: unknown[]) => void;
   onRemove: () => void;
-}> = ({ onEdit, title, onRemove }) => {
+}> = ({ onEdit, title, onRemove, initialState }) => {
   const [remove] = useConfirmCloseModal(modalStateConfigMap.confirm.remove_organization, onRemove);
-  const [edit] = useConfirmCloseModal(modalStateConfigMap.edit.edit_name_organization, onEdit);
+  const [edit] = useConfirmCloseModal(
+    {
+      ...modalStateConfigMap.edit.edit_name_organization,
+      props: { ...modalStateConfigMap.edit.edit_name_organization.props, ...initialState },
+    },
+    onEdit
+  );
 
   return (
     <header className="header">

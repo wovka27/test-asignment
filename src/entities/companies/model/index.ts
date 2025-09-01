@@ -10,6 +10,10 @@ export interface ICompany extends IBaseEntity {
   photos: ICompanyImage[];
 }
 
+export interface ICompanyFormData
+  extends Pick<ICompany, 'type' | 'businessEntity'>,
+    ICompanyContract {}
+
 interface ICompanyContract {
   no: string;
   issue_date: Date | string;

@@ -1,25 +1,30 @@
 import { useNavigate } from 'react-router-dom';
 
-import SectionContainer from '@shared/ui/SectionContainer';
+import ContentRow from '@features/content-block';
+import mockDataList from '@features/entity-list/config/mocks/mockDataList.json';
 
 import './entity-list.scss';
 
 export const EntityList = () => {
+  const navigate = useNavigate();
+
+  const handleClick = (id: string) => () => {
+    navigate(`/companies/${id}`);
+  };
   return (
     <div className="container container-flex-column">
-      {Array.from({ length: 10 }).map((_, i) => (
-        <EntityListItem key={i} />
+      {mockDataList.map((item) => (
+        <EntityListItem
+          name={item.name}
+          title={item.shortName}
+          key={item.id}
+          onClick={handleClick(item.id)}
+        />
       ))}
     </div>
   );
 };
 
-const EntityListItem = () => {
-  const navigate = useNavigate();
-  return (
-    <SectionContainer
-      titleText={'Entity'}
-      actions={[{ icon: 'edit', title: 'View', onClick: () => navigate('/companies/12') }]}
-    ></SectionContainer>
-  );
+const EntityListItem = ({ title, onClick, name }) => {
+  return <ContentRow data={[{ label: 'Name', value: name }]} onEdit={onClick} titleText={title} />;
 };

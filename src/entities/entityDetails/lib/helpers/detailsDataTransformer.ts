@@ -4,16 +4,32 @@ import { FormatHelper } from '@shared/lib/helpers';
 
 type ObjType = Record<string, string | ((format: typeof FormatHelper) => string)>;
 
-type DetailsDataTransformerType = (config: Record<string, ObjType>) => {
+type DetailsDataTransformerType = (
+  config: Record<string, ObjType>,
+  formDataState?: Record<string, Record<string, string | string[]>>
+) => {
   data: Omit<IContentRow, 'onEdit'>[];
 };
 
-export const detailsDataTransformer: DetailsDataTransformerType = (config) => {
+export const detailsDataTransformer: DetailsDataTransformerType = (
+  config,
+  formDataState?: Record<string, Record<string, string | string[]>>
+) => {
   return {
-    data: Object.entries(config).map(([title, detailsData]) => ({
-      titleText: title,
-      data: toArrayOptions(detailsData),
-    })),
+    data: Object.entries(config).map(([title, detailsData]) => {
+      const [titleText, componentFormRegistryKey] = title.split('|') as [
+        string,
+        string | undefined,
+      ];
+
+      return {
+        titleText,
+        componentFormRegistryKey,
+        data: toArrayOptions(detailsData),
+        ...(formDataState &&
+          componentFormRegistryKey && { initialState: formDataState[componentFormRegistryKey] }),
+      };
+    }),
   };
 };
 

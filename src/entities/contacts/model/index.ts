@@ -7,6 +7,12 @@ export interface IContact extends Omit<IBaseEntity, 'name'> {
   email: string;
 }
 
+export interface IContactFormData {
+  person: string;
+  phone: string;
+  email: string;
+}
+
 export type ContactRequestData = Partial<
   Pick<IContact, 'firstname' | 'lastname' | 'phone' | 'email'>
 >;

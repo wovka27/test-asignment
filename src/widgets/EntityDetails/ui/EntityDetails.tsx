@@ -4,6 +4,8 @@ import Header from '@widgets/Header';
 import ContentRow from '@features/content-block';
 import Photos from '@features/photos';
 
+import { entityComponentFormRegistry } from '@entities/entityDetails/config';
+
 import './entity-details.scss';
 
 export const EntityDetails: EntityDetailsProps = ({
@@ -17,13 +19,19 @@ export const EntityDetails: EntityDetailsProps = ({
   photosOnUpload,
   photosOnRemove,
 }) => {
-  const Items = () =>
-    data.map((item) => (
-      <ContentRow hideActions={hideActions} key={item.titleText + item.id} {...item} />
+  const Items = () => {
+    return data.map((item) => (
+      <ContentRow
+        EntityForm={entityComponentFormRegistry[item.componentFormRegistryKey!]}
+        hideActions={hideActions}
+        key={item.titleText + item.id}
+        {...item}
+      />
     ));
+  };
 
-  const PhotosData = () =>
-    photosData ? (
+  const PhotosSection = () => {
+    return photosData ? (
       <Photos
         data={photosData || []}
         title={'Photos'}
@@ -31,17 +39,24 @@ export const EntityDetails: EntityDetailsProps = ({
         onUpload={photosOnUpload!}
       />
     ) : null;
+  };
 
-  const IsHeader = () =>
-    isHeader ? (
-      <Header title={headerTitle!} onRemove={headerOnRemove!} onEdit={headerOnEdit!} />
+  const IsHeader = () => {
+    return isHeader ? (
+      <Header
+        title={headerTitle!}
+        onRemove={headerOnRemove!}
+        onEdit={headerOnEdit!}
+        initialState={{ name: headerTitle || '' }}
+      />
     ) : null;
+  };
 
   return (
     <div className="entity-details container">
       <IsHeader />
       <Items />
-      <PhotosData />
+      <PhotosSection />
     </div>
   );
 };
