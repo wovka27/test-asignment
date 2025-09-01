@@ -13,10 +13,8 @@ import { companyDetailsStore } from '@entities/companies/model/companyDetalis.st
 import { contactsDetailsStore } from '@entities/contacts/model/contactsDetalis.store.ts';
 import { useDetailsData } from '@entities/entityDetails/lib/hooks';
 
-import { FormatHelper } from '@shared/lib/helpers';
-
 export const CompanyDetails: React.FC = observer(() => {
-  const { data, payload } = useDetailsData<ICompany>(
+  const { data } = useDetailsData<ICompany>(
     () => {
       const { contract, businessEntity, type } = companyDetailsStore.data;
       const { firstname, lastname, email, phone } = contactsDetailsStore.data;
@@ -37,8 +35,8 @@ export const CompanyDetails: React.FC = observer(() => {
     },
     () => {
       return {
-        company: companyDetailsStore.initialFormState,
-        contacts: contactsDetailsStore.initialFormState,
+        company: companyDetailsStore.data,
+        contacts: contactsDetailsStore.data,
       };
     }
   );
@@ -54,7 +52,7 @@ export const CompanyDetails: React.FC = observer(() => {
       data={data}
       headerTitle={companyDetailsStore.data?.name}
       headerOnEdit={onEdit}
-      photosData={payload.details.photos}
+      photosData={companyDetailsStore.data?.photos || []}
       photosOnUpload={fetchAddCompanyImage}
       photosOnRemove={fetchDeleteCompanyImage}
       headerOnRemove={fetchDeleteCompany}

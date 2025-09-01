@@ -1,6 +1,6 @@
 import type { IBaseEntity } from '@entities/base/model';
 
-export interface IContact extends Omit<IBaseEntity, 'name'> {
+export interface IContact extends Partial<Omit<IBaseEntity, 'name'>> {
   lastname: string;
   firstname: string;
   phone: string;
@@ -8,7 +8,7 @@ export interface IContact extends Omit<IBaseEntity, 'name'> {
 }
 
 export interface IContactFormData {
-  person: string;
+  fullName: string;
   phone: string;
   email: string;
 }

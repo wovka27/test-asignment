@@ -1,7 +1,7 @@
 import type { ICheckboxProps } from '@shared/ui/Checkbox/model';
 import type { IContentInfoItem } from '@shared/ui/ContentInfoItem/model';
 import type { Input } from '@shared/ui/Input/model';
-import type { SelectItemProps, SelectType } from '@shared/ui/Select/model';
+import type { SelectItemProps } from '@shared/ui/Select/model';
 
 export interface IFormFieldGenerator {
   data: FormField[];
@@ -20,34 +20,38 @@ export interface IFieldBase {
   name: string;
 }
 
-export interface IFormFieldInput extends IContentInfoItem, IFieldBase {
+export interface IFormFieldProps<T> {
+  props?: T;
+}
+
+export interface IFormFieldInput extends IContentInfoItem, IFieldBase, IFormFieldProps<Input> {
   type: 'input';
-  props: Input;
 }
 
-export interface IFormFieldTextarea extends IContentInfoItem, IFieldBase {
+export interface IFormFieldTextarea extends IContentInfoItem, IFieldBase, IFormFieldProps<Input> {
   type: 'textarea';
-  props: Input;
 }
 
-export interface IFormFieldInputDate extends IContentInfoItem, IFieldBase {
+export interface IFormFieldInputDate extends IContentInfoItem, IFieldBase, IFormFieldProps<Input> {
   type: 'date';
-  props: Input;
 }
 
-export interface IFormFieldInputDateTime extends IContentInfoItem, IFieldBase {
+export interface IFormFieldInputDateTime
+  extends IContentInfoItem,
+    IFieldBase,
+    IFormFieldProps<Input> {
   type: 'datetime';
-  props: Input;
 }
 
-export interface IFormFieldCheckbox extends IContentInfoItem, IFieldBase {
+export interface IFormFieldCheckbox
+  extends IContentInfoItem,
+    IFieldBase,
+    IFormFieldProps<ICheckboxProps> {
   type: 'checkbox';
-  props: ICheckboxProps;
 }
 
-export interface IFormFieldSelect extends IContentInfoItem, IFieldBase {
+export interface IFormFieldSelect extends IContentInfoItem, IFieldBase, IFormFieldProps<unknown> {
   type: 'select';
-  props: SelectType;
   options: (SelectItemProps & { label: string })[];
 }
 
@@ -57,4 +61,3 @@ export interface IFormFieldGroup {
 }
 
 export type FormFieldGeneratorType = React.FC<IFormFieldGenerator>;
-export type FormFieldItemProps = React.FC<FormField>;

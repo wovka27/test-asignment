@@ -1,6 +1,11 @@
 .select {
   position: relative;
 
+  &__error {
+    font-size: 12px;
+    color: var(--color-red);
+  }
+
   &__control {
     display: flex;
     justify-content: space-between;
@@ -11,6 +16,10 @@
     cursor: pointer;
     background: var(--color-light);
     transition-duration: var(--transition-duration);
+
+    &--error {
+      border-color: var(--color-red);
+    }
 
     &:hover {
       border-color: #666;

@@ -10,7 +10,7 @@ import SectionContainer from '@shared/ui/SectionContainer';
 
 import './photos.scss';
 
-export const Photos: PhotosProps = ({ title, onUpload, data, onRemove }) => {
+export const Photos: PhotosProps = ({ onUpload, data, onRemove }) => {
   const [photos, setPhotos] = useState<typeof data>(data);
   const inputRef = useRef<HTMLInputElement | null>(null);
 
@@ -24,35 +24,36 @@ export const Photos: PhotosProps = ({ title, onUpload, data, onRemove }) => {
       formData.append('file', file);
 
       onUpload(formData).then((res) => {
-        setPhotos((prevState) => [...prevState, JSON.parse(res.data)])
+        setPhotos((prevState) => [...prevState, JSON.parse(res.data)]);
       });
     }
   };
   return (
-    <SectionContainer
-      isForm
-      titleText={title}
-      actions={[{ title: 'Add', icon: 'add_photo', onClick }]}
-    >
-      <input
-        ref={inputRef}
-        className="visually-hidden"
-        type="file"
-        name="file"
-        onChange={onFileSelect}
-      />
-      <GrabScrollContainer>
-        <div className={clsx('photos__list')}>
-          {photos.map((i) => (
-            <ImagePreview
-              src={i.filepath}
-              key={i.filepath}
-              alt={i.name}
-              onRemove={() => onRemove(i)}
-            />
-          ))}
-        </div>
-      </GrabScrollContainer>
+    <SectionContainer>
+      <SectionContainer.Header titleText={'Photos'}>
+        <SectionContainer.Actions data={[{ title: 'Add', icon: 'add_photo', onClick }]} />
+      </SectionContainer.Header>
+      <SectionContainer.Body>
+        <input
+          ref={inputRef}
+          className="visually-hidden"
+          type="file"
+          name="file"
+          onChange={onFileSelect}
+        />
+        <GrabScrollContainer>
+          <div className={clsx('photos__list')}>
+            {photos.map((i) => (
+              <ImagePreview
+                src={i.filepath}
+                key={i.filepath}
+                alt={i.name}
+                onRemove={() => onRemove(i)}
+              />
+            ))}
+          </div>
+        </GrabScrollContainer>
+      </SectionContainer.Body>
     </SectionContainer>
   );
 };

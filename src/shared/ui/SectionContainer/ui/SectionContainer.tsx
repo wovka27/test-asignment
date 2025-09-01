@@ -1,49 +1,67 @@
+import React from 'react';
+
 import clsx from 'clsx';
 
 import Button from '@shared/ui/Button';
-import type { ActionType, SectionContainerProps } from '@shared/ui/SectionContainer/model';
+import type {
+  SectionContainerActionsProps,
+  SectionContainerBodyProps,
+  SectionContainerHeaderProps,
+  SectionContainerProps,
+} from '@shared/ui/SectionContainer/model';
 
 import './section-container.scss';
 
-export const SectionContainer: SectionContainerProps = ({
+const SectionContainer: SectionContainerProps = ({
   children,
   className,
-  titleText,
-  actions,
   'aria-labelledby': ariaLabelledby,
-  isForm,
   ...rest
 }) => {
-  const Container = !isForm ? 'section' : 'form';
   return (
-    <Container
+    <div
       aria-labelledby={ariaLabelledby}
       className={clsx('section-container', className)}
       {...rest}
     >
-      {titleText && (
-        <div className={clsx('section-container__header')}>
-          <h2 id={ariaLabelledby} className={clsx('section-container__title')}>
-            {titleText}
-          </h2>
-          {actions && (
-            <div className={clsx('section-container__header-actions')}>
-              <Actions data={actions} />
-            </div>
-          )}
-        </div>
-      )}
-      <div className={clsx('section-container__body')}>{children}</div>
-    </Container>
+      {children}
+    </div>
   );
 };
 
-const Actions: React.FC<{ data?: ActionType[] }> = ({ data }) => {
+const Header: SectionContainerHeaderProps = ({ ariaLabelledby, children, titleText }) => {
+  if (!titleText) return null;
+
+  return (
+    <div className={clsx('section-container__header')}>
+      <h2 id={ariaLabelledby} className={clsx('section-container__title')}>
+        {titleText}
+      </h2>
+      {children}
+    </div>
+  );
+};
+
+const Body: SectionContainerBodyProps = ({ children }) => {
+  return <div className={clsx('section-container__body')}>{children}</div>;
+};
+
+const Actions: SectionContainerActionsProps = ({ data }) => {
   if (!data?.length) return null;
 
-  return data.map(({ title, icon, onClick, type }) => (
-    <Button key={title} variant="outline" size="sm" icon={icon} onClick={onClick} type={type}>
-      {title}
-    </Button>
-  ));
+  return (
+    <div className={clsx('section-container__header-actions')}>
+      {data.map(({ title, icon, onClick, type }) => (
+        <Button key={title} variant="outline" size="sm" icon={icon} onClick={onClick} type={type}>
+          {title}
+        </Button>
+      ))}
+    </div>
+  );
 };
+
+SectionContainer.Header = Header;
+SectionContainer.Actions = Actions;
+SectionContainer.Body = Body;
+
+export default SectionContainer;

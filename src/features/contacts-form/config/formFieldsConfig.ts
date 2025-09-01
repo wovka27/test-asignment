@@ -1,13 +1,10 @@
-export const formFieldsConfigResolver = (state) => [
+export const fields = [
   {
     type: 'input',
-    name: 'person',
+    name: 'fullName',
     label: 'Responsible person:',
     props: {
-      pattern: '(\\w+)\\s(\\w+)',
-      required: true,
       placeholder: 'Firstname Lastname',
-      defaultValue: state?.person,
     },
   },
   {
@@ -15,10 +12,7 @@ export const formFieldsConfigResolver = (state) => [
     name: 'phone',
     label: 'Phone number:',
     props: {
-      required: true,
-      minLength: 11,
       placeholder: 'Phone number',
-      defaultValue: state?.phone,
     },
   },
   {
@@ -26,9 +20,7 @@ export const formFieldsConfigResolver = (state) => [
     name: 'email',
     label: 'E-mail:',
     props: {
-      required: true,
       placeholder: 'email',
-      defaultValue: state?.email,
     },
   },
 ];

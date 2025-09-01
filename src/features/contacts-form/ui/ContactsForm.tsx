@@ -1,21 +1,26 @@
-import { formFieldsConfigResolver } from '@features/contacts-form/config/formFieldsConfigResolver.ts';
+import { fields } from '@features/contacts-form/config/formFieldsConfig.ts';
+import { type FormValues, schema } from '@features/contacts-form/model/schema.ts';
 
-import contactService from '@entities/contacts/api/Contacts.service.ts';
 import type { EntityComponentFormPropsMap } from '@entities/entityDetails/model/types.ts';
 
-import Form from '@shared/ui/Form';
+import EntityDetailsForm from '@shared/ui/EntityDetailsForm';
+import ContactsService from '@entities/contacts/api/Contacts.service.ts';
 
 export const ContactsForm: React.FC<EntityComponentFormPropsMap['contacts']> = ({
-  setState,
   initialState,
+  setState,
 }) => {
   return (
-    <Form
-      title="Contacts"
-      initialState={initialState}
-      fieldsConfig={formFieldsConfigResolver}
-      formAction={contactService.formAction}
-      setState={setState}
+    <EntityDetailsForm<FormValues>
+      defaultValues={initialState}
+      onSubmit={ContactsService.formAction}
+      titleText={'Contacts'}
+      fields={fields}
+      schema={schema}
+      actions={[
+        { type: 'submit', icon: 'check', title: 'Save changes' },
+        { icon: 'x', title: 'Cancel', onClick: () => setState(false) },
+      ]}
     />
   );
 };

@@ -1,18 +1,11 @@
 import { makeAutoObservable } from 'mobx';
 
-export default class EntityDetailsStore<Data, FormState> {
-  data: Data | null = null;
-  initialFormState: FormState | null = null;
-
-  constructor() {
+export default class EntityDetailsStore<Data> {
+  constructor(public data: Data) {
     makeAutoObservable(this);
   }
 
-  setData = (data: Data | null): void => {
+  public setData = (data: Data): void => {
     this.data = data;
-  };
-
-  setInitialFormState = (initialFormState: FormState): void => {
-    this.initialFormState = initialFormState;
   };
 }

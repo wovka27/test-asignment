@@ -8,7 +8,6 @@ export interface IContentRow {
   EntityForm?: React.ReactNode;
   initialState?: unknown;
   data: { label: string; value: string }[];
-  id?: string;
 }
 
 export type ContentRowProps = React.FC<IContentRow>;

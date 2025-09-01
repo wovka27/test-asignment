@@ -12,6 +12,7 @@ export const Input: InputProps = ({
   ref,
   disabled,
   required,
+  onChange,
   ...props
 }) => {
   const classes = clsx('input__field', `input--${size}`, { 'input__field--error': !!error });
@@ -23,6 +24,7 @@ export const Input: InputProps = ({
         className={classes}
         disabled={disabled}
         required={required}
+        onChange={(event) => onChange?.(event.target.value)}
         aria-invalid={!!error}
         aria-disabled={disabled}
         aria-errormessage={error}

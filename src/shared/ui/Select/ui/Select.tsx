@@ -35,6 +35,7 @@ interface SelectProps
   onChange?: (val: string | string[]) => void;
   onNativeChange?: React.ChangeEventHandler<HTMLSelectElement>;
   dropdownHeight?: number;
+  error?: string;
 }
 
 export const Select: React.FC<PropsWithChildren<SelectProps>> & {
@@ -50,6 +51,7 @@ export const Select: React.FC<PropsWithChildren<SelectProps>> & {
   children,
   dropdownHeight = 300,
   name,
+  error,
   ...otherProps
 }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -185,7 +187,7 @@ export const Select: React.FC<PropsWithChildren<SelectProps>> & {
         aria-haspopup="listbox"
         aria-expanded={isOpen}
         aria-controls={id ? `${id}-dropdown` : 'select-dropdown'}
-        className={clsx('select__control', { open: isOpen })}
+        className={clsx('select__control', { open: isOpen, 'select__control--error': error })}
         onClick={openDropDown}
       >
         <span className="select__value">{renderLabel()}</span>
@@ -193,6 +195,7 @@ export const Select: React.FC<PropsWithChildren<SelectProps>> & {
           <Icon width={20} height={20} name={`chevron_${isOpen ? 'up' : 'down'}`} />
         </span>
       </div>
+      {error && <p className="select__error">{error}</p>}
 
       <select
         id={id ? `${id}-native` : undefined}

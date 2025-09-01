@@ -1,6 +1,6 @@
 import type { IBaseEntity } from '@entities/base/model';
 
-export interface ICompany extends IBaseEntity {
+export interface ICompany extends Partial<IBaseEntity> {
   contactId: string;
   shortName: string;
   businessEntity: string;

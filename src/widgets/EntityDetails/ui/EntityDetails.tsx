@@ -24,7 +24,7 @@ export const EntityDetails: EntityDetailsProps = ({
       <ContentRow
         EntityForm={entityComponentFormRegistry[item.componentFormRegistryKey!]}
         hideActions={hideActions}
-        key={item.titleText + item.id}
+        key={item.titleText}
         {...item}
       />
     ));

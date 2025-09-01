@@ -1,33 +1,31 @@
-import { useActionState } from 'react';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { observer } from 'mobx-react';
+import { FormProvider, useForm } from 'react-hook-form';
 
-import FormFieldGenerator from '@shared/ui/FormFieldGenerator';
-import SectionContainer from '@shared/ui/SectionContainer';
+import type { FormProps } from '@shared/ui/Form/model/types.ts';
 
-export const Form = ({ initialState, formAction, fieldsConfig, setState, title }) => {
-  const [state, action] = useActionState((prevState, payload) => {
-    formAction(prevState, payload).then(() => setState(false));
-  }, initialState);
-  return (
-    <SectionContainer
-      action={action}
-      titleText={title}
-      isForm
-      actions={[
-        {
-          icon: 'check',
-          title: 'Save changes',
-          type: 'submit',
-        },
-        {
-          icon: 'x',
-          title: 'Cancel',
-          onClick: () => {
-            setState(false);
-          },
-        },
-      ]}
-    >
-      <FormFieldGenerator data={fieldsConfig(state)} />
-    </SectionContainer>
-  );
-};
+export const Form = observer(
+  <T extends Record<string, unknown>>({
+    schema,
+    defaultValues,
+    onSubmit,
+    children,
+    syncValues,
+  }: FormProps<T>) => {
+    const methods = useForm<T>({
+      resolver: zodResolver(schema),
+      defaultValues,
+      mode: 'onChange',
+    });
+
+    if (syncValues) methods.watch((values) => syncValues(values));
+
+    return (
+      <FormProvider {...methods}>
+        <form style={{ display: 'contents' }} onSubmit={methods.handleSubmit(onSubmit)}>
+          {children}
+        </form>
+      </FormProvider>
+    );
+  }
+);

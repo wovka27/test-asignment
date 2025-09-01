@@ -10,7 +10,6 @@ export const ContentRow: ContentRowProps = ({
   titleText,
   onEdit,
   data,
-  id,
   EntityForm,
   componentFormRegistryKey,
   initialState,
@@ -35,8 +34,13 @@ export const ContentRow: ContentRowProps = ({
   }
 
   return (
-    <SectionContainer id={id} titleText={titleText} actions={!hideActions ? btn : undefined}>
-      <Items data={data} />
+    <SectionContainer>
+      <SectionContainer.Header titleText={titleText}>
+        <SectionContainer.Actions data={!hideActions ? btn : undefined} />
+      </SectionContainer.Header>
+      <SectionContainer.Body>
+        <Items data={data} />
+      </SectionContainer.Body>
     </SectionContainer>
   );
 };

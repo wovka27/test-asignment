@@ -1,21 +1,27 @@
-import { formFieldConfigResolver } from '@features/company/form/config/formFieldConfigResolver';
+import { fields } from '@features/company/form/config/formFieldsConfig.ts';
+import { type FormValues, schema } from '@features/company/form/model/schema.ts';
 
-import companiesService from '@entities/companies/api/Companies.service.ts';
-import type { EntityComponentFormPropsMap } from '@entities/entityDetails/model/types';
+import type { EntityComponentFormPropsMap } from '@entities/entityDetails/model/types.ts';
 
-import Form from '@shared/ui/Form';
+import EntityDetailsForm from '@shared/ui/EntityDetailsForm';
 
 export const CompanyForm: React.FC<EntityComponentFormPropsMap['company']> = ({
   initialState,
   setState,
 }) => {
   return (
-    <Form
-      title="Company"
-      initialState={initialState}
-      fieldsConfig={formFieldConfigResolver}
-      formAction={companiesService.formAction}
-      setState={setState}
+    <EntityDetailsForm<FormValues>
+      defaultValues={initialState}
+      onSubmit={(v) => {
+        console.log(v);
+      }}
+      titleText={'Company'}
+      fields={fields}
+      schema={schema}
+      actions={[
+        { type: 'submit', icon: 'check', title: 'Save changes' },
+        { icon: 'x', title: 'Cancel', onClick: () => setState(false) },
+      ]}
     />
   );
 };
