@@ -1,4 +1,5 @@
 import { observer } from 'mobx-react';
+import { useNavigate } from 'react-router-dom';
 
 import EntityDetails from '@widgets/EntityDetails';
 
@@ -14,6 +15,7 @@ import { contactsDetailsStore } from '@entities/contacts/model/contactsDetalis.s
 import { useDetailsData } from '@entities/entityDetails/lib/hooks';
 
 export const CompanyDetails: React.FC = observer(() => {
+  const navigate = useNavigate();
   const { data } = useDetailsData<ICompany>(
     () => {
       const { contract, businessEntity, type } = companyDetailsStore.data;
@@ -47,6 +49,10 @@ export const CompanyDetails: React.FC = observer(() => {
     });
   };
 
+  const onRemove = () => {
+    fetchDeleteCompany().then(() => navigate(-1));
+  };
+
   return (
     <EntityDetails
       data={data}
@@ -55,7 +61,7 @@ export const CompanyDetails: React.FC = observer(() => {
       photosData={companyDetailsStore.data?.photos || []}
       photosOnUpload={fetchAddCompanyImage}
       photosOnRemove={fetchDeleteCompanyImage}
-      headerOnRemove={fetchDeleteCompany}
+      headerOnRemove={onRemove}
     />
   );
 });

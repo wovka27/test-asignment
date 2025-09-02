@@ -13,6 +13,9 @@ export class FormatHelper {
   static toCapitalize(arr: string[]): string {
     return arr.map(FormatHelper.toTitleCase).join(', ');
   }
+  static toYesNo(value: boolean): string {
+    return value ? 'Yes' : 'No';
+  }
   static toDate(date: Date | string, options?: Intl.DateTimeFormatOptions): string {
     return new Date(date).toLocaleDateString(
       'default',

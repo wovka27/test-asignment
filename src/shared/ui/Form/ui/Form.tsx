@@ -13,7 +13,7 @@ export const Form = observer(
     syncValues,
   }: FormProps<T>) => {
     const methods = useForm<T>({
-      resolver: zodResolver(schema),
+      resolver: schema ? zodResolver(schema) : undefined,
       defaultValues,
       mode: 'onChange',
     });

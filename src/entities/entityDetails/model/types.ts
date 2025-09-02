@@ -1,12 +1,13 @@
 import type { ICompany } from '@entities/companies/model';
 import type { IContact } from '@entities/contacts/model';
+import type { ISettingsApi } from '@pages/SettingsPage/model/types.ts';
 
 export interface IEntityDetailsLoaderResponse<T> {
   payload: IEntityDetailsLoaderPayload<T>;
 }
 export interface IEntityDetailsLoaderPayload<T> {
   details: T;
-  contacts: IContact;
+  contacts?: IContact;
 }
 
 type EntityComponentFormProps<T> = {
@@ -17,6 +18,10 @@ type EntityComponentFormProps<T> = {
 export type EntityComponentFormPropsMap = {
   contacts: EntityComponentFormProps<IContact>;
   company: EntityComponentFormProps<ICompany>;
+  settingsSubscription: EntityComponentFormProps<ISettingsApi['subscription']>;
+  settingsSecurity: EntityComponentFormProps<ISettingsApi['security']>;
+  settingsNotification: EntityComponentFormProps<ISettingsApi['notifications']>;
+  settingsPreferences: EntityComponentFormProps<ISettingsApi['preferences']>;
 };
 
 export type EntityComponentFormRegistry = {

@@ -1,79 +1,48 @@
-import { z } from 'zod/v3';
+import { observer } from 'mobx-react';
 
-import Button from '@shared/ui/Button';
-import Form from '@shared/ui/Form';
-import type { FormField } from '@shared/ui/FormFieldGenerator/model';
+import type { ISettingsApi } from '@pages/SettingsPage/model/types.ts';
 
-const defaultValues = {
-  no: '',
-  issue_date: '21.03.2025',
-  businessEntity: 'q3',
-  type: ['q3', 'q4'],
-};
+import EntityDetails from '@widgets/EntityDetails';
 
-const schema = z.object({
-  no: z.string(),
-  issue_date: z.string(),
-  businessEntity: z.string(),
-  type: z.any(),
-});
+import { useDetailsData } from '@entities/entityDetails/lib/hooks';
+import { settingsStore } from '@entities/settings/model/settings.store.ts';
 
-const formFields: FormField[] = [
-  {
-    type: 'input',
-    name: 'no',
-    label: 'Agreement number:',
-    props: {
-      placeholder: '1624/2-24',
+export const SettingsPage: React.FC = observer(() => {
+  const { data } = useDetailsData<ISettingsApi>(
+    () => {
+      const { preferences, notifications, security, subscription } = settingsStore.data;
+      return {
+        'Subscription|settingsSubscription': {
+          'Plan:': subscription.plan,
+          'Status:': ({ toYesNo }) => toYesNo(subscription.status),
+          'Renewal date:': ({ toDate }) => toDate(subscription.renewal_date),
+        },
+        'Security|settingsSecurity': {
+          'Two-factor authentication:': ({ toYesNo }) => toYesNo(security.two_factor_enabled),
+          'Last password change:': ({ toDate }) => toDate(security.last_password_change),
+          'Login alerts:': ({ toYesNo }) => toYesNo(security.login_alerts),
+        },
+        'Notifications|settingsNotification': {
+          'Email notifications:': ({ toYesNo }) => toYesNo(notifications.email_notifications),
+          'SMS notifications:': ({ toYesNo }) => toYesNo(notifications.sms_notifications),
+          'Push notifications:': ({ toYesNo }) => toYesNo(notifications.push_notifications),
+        },
+        'Preferences|settingsPreferences': {
+          'Language:': preferences.language,
+          'Time zone:': preferences.time_zone,
+          'Theme:': preferences.theme,
+        },
+      };
     },
-  },
-  {
-    type: 'input',
-    name: 'issue_date',
-    label: 'Date:',
-  },
-  {
-    type: 'select',
-    label: 'Business entity:',
-    name: 'businessEntity',
-    options: [
-      { value: 'q1', label: 'q1' },
-      { value: 'q2', label: 'q2' },
-      { value: 'q3', label: 'q3' },
-      { value: 'q4', label: 'q4' },
-      { value: 'q5', label: 'q5' },
-    ],
-  },
-  {
-    type: 'select',
-    label: 'Company type:',
-    name: 'type',
-    options: [
-      { value: 'q1', label: 'q1' },
-      { value: 'q2', label: 'q2' },
-      { value: 'q3', label: 'q3' },
-      { value: 'q4', label: 'q4' },
-      { value: 'q5', label: 'q5' },
-    ],
-    props: {
-      multiple: true,
-    },
-  },
-];
-
-export const SettingsPage = () => {
-  return (
-    <section className="container container-flex-column">
-      <Form
-        fields={formFields}
-        schema={schema}
-        defaultValues={defaultValues}
-        onSubmit={(a) => {
-          console.log(a);
-        }}
-      >
-        <Button type={'submit'}>Submit</Button>
-      </Form>
-    </section>
+    (payload) => {
+      return {
+        settingsSubscription: payload.details.subscription,
+        settingsSecurity: payload.details.security,
+        settingsNotification: payload.details.notifications,
+        settingsPreferences: payload.details.preferences,
+      };
+    }
   );
-};
+
+  return <EntityDetails isHeader={false} data={data} />;
+});

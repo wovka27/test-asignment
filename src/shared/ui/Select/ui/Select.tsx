@@ -167,7 +167,6 @@ export const Select: React.FC<PropsWithChildren<SelectProps>> & {
   const handleNativeChange: React.ChangeEventHandler<HTMLSelectElement> = (e) => {
     if (multiple) {
       const vals = Array.from(e.target.selectedOptions).map((o) => o.value);
-      console.log(vals);
       if (!isControlled) setInternalValue(vals);
       onChange?.(vals);
     } else {

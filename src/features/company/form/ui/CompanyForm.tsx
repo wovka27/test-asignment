@@ -1,6 +1,7 @@
 import { fields } from '@features/company/form/config/formFieldsConfig.ts';
 import { type FormValues, schema } from '@features/company/form/model/schema.ts';
 
+import CompaniesService from '@entities/companies/api/Companies.service.ts';
 import type { EntityComponentFormPropsMap } from '@entities/entityDetails/model/types.ts';
 
 import EntityDetailsForm from '@shared/ui/EntityDetailsForm';
@@ -12,9 +13,7 @@ export const CompanyForm: React.FC<EntityComponentFormPropsMap['company']> = ({
   return (
     <EntityDetailsForm<FormValues>
       defaultValues={initialState}
-      onSubmit={(v) => {
-        console.log(v);
-      }}
+      onSubmit={CompaniesService.formAction}
       titleText={'Company'}
       fields={fields}
       schema={schema}

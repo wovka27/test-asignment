@@ -61,7 +61,7 @@
     &:active {
       border-color: #6c3ef8;
       color: #6c3ef8;
-      background: rgba(108, 62, 248, 0.05);
+      background: var(--color-light);
     }
   }
 
@@ -92,12 +92,11 @@
     justify-content: center;
 
     &:hover {
-      background: #3b3b3b;
+      background: rgba(59, 59, 59, 0.05);
     }
 
     &:active {
-      background: #9981ff;
-      color: var(--color-light);
+      background: rgba(153, 129, 255, 0.2);
     }
   }
 

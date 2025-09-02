@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import ContentRow from '@features/content-block';
 import mockDataList from '@features/entity-list/config/mocks/mockDataList.json';
@@ -7,9 +7,10 @@ import './entity-list.scss';
 
 export const EntityList = () => {
   const navigate = useNavigate();
+  const { pathname } = useLocation();
 
   const handleClick = (id: string) => () => {
-    navigate(`/companies/${id}`);
+    navigate(`${pathname}/${id}`);
   };
   return (
     <div className="container container-flex-column">

@@ -3,6 +3,7 @@ import type { RouteObject } from 'react-router-dom';
 import CompanyDetailsPage from '@pages/CompanyDetailsPage';
 import { MainPage } from '@pages/MainPage';
 import SettingsPage from '@pages/SettingsPage';
+import { settingDetailsLoader } from '@pages/SettingsPage/api/settingDetailsLoader.ts';
 
 import { privateLoader } from '@features/auth/ui/privateLoader';
 import EntityList from '@features/entity-list';
@@ -22,11 +23,12 @@ const routes: RouteObject[] = [
   {
     path: '/settings',
     Component: SettingsPage,
-    loader: privateLoader,
+    loader: settingDetailsLoader,
     handle: {
       layout: 'main',
       hideMenu: true,
       isSelectedInMenu: true,
+      menuParent: '/settings'
     },
   },
   {
@@ -38,6 +40,7 @@ const routes: RouteObject[] = [
         handle: {
           layout: 'main',
           entity_type: 'organization',
+          menuParent: '/companies',
         },
       },
       {
@@ -47,6 +50,7 @@ const routes: RouteObject[] = [
         handle: {
           layout: 'main',
           entity_type: 'organization',
+          menuParent: '/companies',
         },
       },
       {
@@ -55,6 +59,7 @@ const routes: RouteObject[] = [
         handle: {
           layout: 'main',
           entity_type: 'contractor',
+          menuParent: '/companies',
         },
       },
       {
@@ -64,6 +69,7 @@ const routes: RouteObject[] = [
         handle: {
           layout: 'main',
           entity_type: 'contractor',
+          menuParent: '/companies',
         },
       },
       {
@@ -72,6 +78,7 @@ const routes: RouteObject[] = [
         handle: {
           layout: 'main',
           entity_type: 'client',
+          menuParent: '/companies',
         },
       },
       {
@@ -81,6 +88,7 @@ const routes: RouteObject[] = [
         handle: {
           layout: 'main',
           entity_type: 'client',
+          menuParent: '/companies',
         },
       },
     ],

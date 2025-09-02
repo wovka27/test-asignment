@@ -20,14 +20,16 @@ export const EntityDetails: EntityDetailsProps = ({
   photosOnRemove,
 }) => {
   const Items = () => {
-    return data.map((item) => (
-      <ContentRow
-        EntityForm={entityComponentFormRegistry[item.componentFormRegistryKey!]}
-        hideActions={hideActions}
-        key={item.titleText}
-        {...item}
-      />
-    ));
+    return data.map((item) => {
+      return (
+        <ContentRow
+          EntityForm={entityComponentFormRegistry[item.componentFormRegistryKey!]}
+          hideActions={hideActions}
+          key={item.titleText}
+          {...item}
+        />
+      )
+    });
   };
 
   const PhotosSection = () => {

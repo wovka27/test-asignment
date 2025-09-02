@@ -15,17 +15,16 @@
     border-radius: 6px;
     padding: 8px 12px;
     font-size: 14px;
-    transition:
-      border-color 0.2s ease,
-      box-shadow 0.2s ease;
+    transition-duration: var(--transition-duration);
+    transition-property: border-color, box-shadow;
 
     &:hover {
       border-color: #999;
     }
 
     &:focus {
-      border-color: #6c3ef8;
-      box-shadow: 0 0 0 2px rgba(108, 62, 248, 0.2);
+      border-color: var(--color-blue);
+      box-shadow: 0 0 0 rem(2) rgba(108, 62, 248, 0.2);
       outline: none;
     }
 
