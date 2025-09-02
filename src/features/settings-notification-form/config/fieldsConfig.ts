@@ -1,5 +1,6 @@
-import type { FormField } from '@shared/ui/FormFieldGenerator/model';
 import { boolOptions } from '@pages/SettingsPage/constants/boolOptions.ts';
+
+import type { FormField } from '@shared/ui/FormFieldGenerator/model';
 
 export const fieldsConfig: FormField[] = [
   {

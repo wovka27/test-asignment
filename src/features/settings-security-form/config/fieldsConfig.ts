@@ -10,7 +10,7 @@ export const fieldsConfig: FormField[] = [
     label: 'Two-factor authentication:',
   },
   {
-    type: 'input',
+    type: 'date',
     name: 'last_password_change',
     label: 'Last password change:',
   },

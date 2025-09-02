@@ -25,4 +25,5 @@ export interface IHttpClientFailedQueue {
 
 export interface IHttpAxiosRequestConfig extends InternalAxiosRequestConfig {
   _retry?: boolean;
+  _retryCount?: number;
 }

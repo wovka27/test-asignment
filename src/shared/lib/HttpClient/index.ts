@@ -70,6 +70,34 @@ export class HttpClient implements IHttpClient {
       async (error: AxiosError) => {
         const originalRequest: IHttpAxiosRequestConfig | undefined = error.config;
 
+        if (!originalRequest) {
+          return Promise.reject(error);
+        }
+
+        if (!originalRequest._retryCount) {
+          originalRequest._retryCount = 0;
+        }
+
+        const maxRetries = 3;
+
+        if (!error.response) {
+          if (originalRequest._retryCount < maxRetries) {
+            originalRequest._retryCount++;
+            console.warn(`Network error, retrying... (${originalRequest._retryCount})`);
+            return this.instance(originalRequest);
+          }
+          return Promise.reject(new Error('Network Error – сервер недоступен.'));
+        }
+
+        if (error.response.status === 500) {
+          if (originalRequest._retryCount < maxRetries) {
+            originalRequest._retryCount++;
+            console.warn(`Server error 500, retrying... (${originalRequest._retryCount})`);
+            return this.instance(originalRequest);
+          }
+          return Promise.reject(new Error('Ошибка сервера (500). Попробуйте позже.'));
+        }
+
         if (originalRequest && error.response?.status === 401 && !originalRequest._retry) {
           if (this.isRefreshing) {
             return new Promise((resolve, reject) => {

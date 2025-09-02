@@ -2,7 +2,7 @@ import { z } from 'zod/v3';
 
 export const schema = z.object({
   plan: z.string(),
-  status: z.coerce.boolean(),
+  status: z.string(),
   renewal_date: z.string().date(),
 });
 

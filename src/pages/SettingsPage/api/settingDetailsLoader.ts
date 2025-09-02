@@ -22,18 +22,18 @@ export const settingDetailsLoader = async (): Promise<
 const data = {
   subscription: {
     plan: 'premium',
-    status: true,
-    renewal_date: '2025-12-01T00:00:00Z',
+    status: 'No',
+    renewal_date: '2025-12-01',
   },
   security: {
-    two_factor_enabled: true,
-    last_password_change: '2025-08-15T10:45:00Z',
-    login_alerts: true,
+    two_factor_enabled: 'No',
+    last_password_change: '2025-08-15',
+    login_alerts: 'No',
   },
   notifications: {
-    email_notifications: true,
-    sms_notifications: false,
-    push_notifications: true,
+    email_notifications: 'No',
+    sms_notifications: 'No',
+    push_notifications: 'No',
   },
   preferences: {
     language: 'en',

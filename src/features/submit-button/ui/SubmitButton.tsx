@@ -3,12 +3,13 @@ import { useFormStatus } from 'react-dom';
 import type { SubmitButtonProps } from '@features/submit-button/model';
 
 import Button from '@shared/ui/Button';
+import { useFormContext } from 'react-hook-form';
 
 export const SubmitButton: SubmitButtonProps = ({ children, ...rest }) => {
-  const { pending } = useFormStatus();
+  const { formState } = useFormContext();
 
   return (
-    <Button loading={pending} type="submit" {...rest}>
+    <Button loading={formState.isSubmitting} type="submit" {...rest}>
       {children}
     </Button>
   );

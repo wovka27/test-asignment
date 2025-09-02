@@ -10,6 +10,7 @@ import FormFieldGenerator from '@shared/ui/FormFieldGenerator';
 import SectionContainer from '@shared/ui/SectionContainer';
 
 import './login-form.scss';
+import { useFormContext } from 'react-hook-form';
 
 export const LoginForm = () => {
   const navigate = useNavigate();

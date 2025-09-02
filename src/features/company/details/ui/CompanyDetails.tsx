@@ -1,6 +1,9 @@
 import { observer } from 'mobx-react';
 import { useNavigate } from 'react-router-dom';
 
+import { modalStateConfigMap } from '@app/providers/modal/lib/modalRegistry.ts';
+import { useConfirmCloseModal } from '@app/providers/modal/lib/useConfirmCloseModal.ts';
+
 import EntityDetails from '@widgets/EntityDetails';
 
 import {
@@ -43,6 +46,13 @@ export const CompanyDetails: React.FC = observer(() => {
     }
   );
 
+  const [removePhoto] = useConfirmCloseModal(
+    modalStateConfigMap.confirm.remove_photo,
+    (_, { name }) => {
+      fetchDeleteCompanyImage(name);
+    }
+  );
+
   const onEdit = (v) => {
     fetchUpdateCompany(v).then(({ data }) => {
       companyDetailsStore.setData(data);
@@ -60,7 +70,7 @@ export const CompanyDetails: React.FC = observer(() => {
       headerOnEdit={onEdit}
       photosData={companyDetailsStore.data?.photos || []}
       photosOnUpload={fetchAddCompanyImage}
-      photosOnRemove={fetchDeleteCompanyImage}
+      photosOnRemove={removePhoto}
       headerOnRemove={onRemove}
     />
   );

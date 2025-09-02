@@ -14,18 +14,18 @@ export const SettingsPage: React.FC = observer(() => {
       return {
         'Subscription|settingsSubscription': {
           'Plan:': subscription.plan,
-          'Status:': ({ toYesNo }) => toYesNo(subscription.status),
+          'Status:': subscription.status,
           'Renewal date:': ({ toDate }) => toDate(subscription.renewal_date),
         },
         'Security|settingsSecurity': {
-          'Two-factor authentication:': ({ toYesNo }) => toYesNo(security.two_factor_enabled),
+          'Two-factor authentication:': security.two_factor_enabled,
           'Last password change:': ({ toDate }) => toDate(security.last_password_change),
-          'Login alerts:': ({ toYesNo }) => toYesNo(security.login_alerts),
+          'Login alerts:': security.login_alerts,
         },
         'Notifications|settingsNotification': {
-          'Email notifications:': ({ toYesNo }) => toYesNo(notifications.email_notifications),
-          'SMS notifications:': ({ toYesNo }) => toYesNo(notifications.sms_notifications),
-          'Push notifications:': ({ toYesNo }) => toYesNo(notifications.push_notifications),
+          'Email notifications:': notifications.email_notifications,
+          'SMS notifications:': notifications.sms_notifications,
+          'Push notifications:': notifications.push_notifications,
         },
         'Preferences|settingsPreferences': {
           'Language:': preferences.language,
@@ -34,12 +34,12 @@ export const SettingsPage: React.FC = observer(() => {
         },
       };
     },
-    (payload) => {
+    () => {
       return {
-        settingsSubscription: payload.details.subscription,
-        settingsSecurity: payload.details.security,
-        settingsNotification: payload.details.notifications,
-        settingsPreferences: payload.details.preferences,
+        settingsSubscription: settingsStore.data.subscription,
+        settingsSecurity: settingsStore.data.security,
+        settingsNotification: settingsStore.data.notifications,
+        settingsPreferences: settingsStore.data.preferences,
       };
     }
   );

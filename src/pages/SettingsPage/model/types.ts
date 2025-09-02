@@ -1,19 +1,19 @@
 export interface SubscriptionApi {
   plan: string;
-  status: boolean;
+  status: string;
   renewal_date: string;
 }
 
 export interface SecurityApi {
-  two_factor_enabled: boolean;
+  two_factor_enabled: string;
   last_password_change: string;
-  login_alerts: boolean;
+  login_alerts: string;
 }
 
 export interface NotificationsApi {
-  email_notifications: boolean;
-  sms_notifications: boolean;
-  push_notifications: boolean;
+  email_notifications: string;
+  sms_notifications: string;
+  push_notifications: string;
 }
 
 export interface PreferencesApi {

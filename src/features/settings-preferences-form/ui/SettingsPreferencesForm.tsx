@@ -4,6 +4,7 @@ import { schema } from '@features/settings-preferences-form/model/schema';
 import type { EntityComponentFormPropsMap } from '@entities/entityDetails/model/types.ts';
 
 import EntityDetailsForm from '@shared/ui/EntityDetailsForm';
+import SettingsService from '@entities/settings/api/settings.service.ts';
 
 export const SettingsPreferencesForm: React.FC<
   EntityComponentFormPropsMap['settingsPreferences']
@@ -11,7 +12,7 @@ export const SettingsPreferencesForm: React.FC<
   return (
     <EntityDetailsForm
       defaultValues={initialState}
-      onSubmit={() => {}}
+      onSubmit={(v) => SettingsService.formAction('preferences', v)}
       titleText={'Preferences'}
       fields={fieldsConfig}
       schema={schema}
