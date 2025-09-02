@@ -6,9 +6,11 @@ import { unauthorizedRoutes } from '@app/providers/router/routes/unauthorized-ro
 
 import NetWorkErrorPage from '@pages/NetWorkErrorPage';
 import NotFoundPage from '@pages/NotFoundPage';
+import { privateLoader } from '@features/auth/ui/privateLoader';
 
 const notFoundRouteParams = {
   element: <NotFoundPage />,
+  loader: privateLoader,
   handle: {
     layout: 'main',
     hideMenu: true,

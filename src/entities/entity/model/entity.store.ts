@@ -1,4 +1,4 @@
-import { makeAutoObservable, runInAction } from 'mobx';
+import { makeAutoObservable } from 'mobx';
 
 import {
   fetchAddCompanyImage,
@@ -38,7 +38,7 @@ export default class EntityStore {
   };
 
   deleteListItem = (index: number) => {
-    this.list.splice(index, 1);
+    this.list = this.list.filter((_, idx) => idx !== index);
   };
 
   replaceListItem = (index: number, data: ICompany) => {
@@ -54,18 +54,16 @@ export default class EntityStore {
   };
 
   getById = async (id: string) => {
-    if (this.details && this.details.id === id) return;
+    if (this.details && this.details?.id === id) return;
 
     if (!this.list.length) await this.getList();
 
     const item = this.list.find((item) => item.id === id);
 
-    if (!item) return;
+    if (item === undefined) return;
 
-    runInAction(() => {
-      this.setDetails(item);
-      contactsStore.getById(item.contactId);
-    });
+    this.setDetails(item);
+    await contactsStore.getById(item.contactId);
   };
 
   updateById = async (id: string, data: ICompany) => {
@@ -86,13 +84,11 @@ export default class EntityStore {
   deleteById = async (id: string) => {
     const index = this.indexedData.get(id);
 
-    if (!index) return;
+    if (index === undefined) return;
 
-    fetchDeleteCompany(id).then(() => {
-      runInAction(() => {
-        this.setDetails(null);
-        this.deleteListItem(index);
-      });
+    fetchDeleteCompany(DETAIL_ENTITY_ID).then(() => {
+      this.setDetails(null);
+      this.deleteListItem(index);
     });
   };
 
@@ -115,7 +111,7 @@ export default class EntityStore {
 
     if (index) {
       fetchAddCompanyImage(DETAIL_ENTITY_ID, formData).then(({ data }) => {
-        this.list[index].photos.push(data);
+        this.list[index].photos.push(JSON.parse(data));
       });
     }
   };

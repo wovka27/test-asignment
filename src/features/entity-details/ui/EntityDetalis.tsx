@@ -37,11 +37,11 @@ export const EntityDetails: React.FC<{ store: InstanceType<typeof EntityStore> }
     );
 
     const onEdit = async (v) => {
-      await store.updateById(route!.params.id, v);
+      await store.updateById(route!.params.id!, v);
     };
 
     const onRemove = () => {
-      store.deleteById(route!.params.id).then(() => navigate(-1));
+      store.deleteById(route!.params.id!).then(() => navigate(-1));
     };
 
     return (

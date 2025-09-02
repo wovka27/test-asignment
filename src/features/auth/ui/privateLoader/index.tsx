@@ -4,7 +4,6 @@ import { authStore } from '@entities/auth/model/auth.store.ts';
 
 export const privateLoader: RouteObject['loader'] = async () => {
   await authStore.checkAuth();
-
   if (!authStore.isAuthenticated) return redirect('/login');
 
   return null;

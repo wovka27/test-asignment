@@ -98,30 +98,8 @@ export class HttpClient implements IHttpClient {
           return Promise.reject(new Error('Ошибка сервера (500). Попробуйте позже.'));
         }
 
-        if (originalRequest && error.response?.status === 401 && !originalRequest._retry) {
-          if (this.isRefreshing) {
-            return new Promise((resolve, reject) => {
-              this.failedQueue.push({
-                resolve: () => resolve(this.instance(originalRequest!)),
-                reject,
-              });
-            });
-          }
-
-          originalRequest._retry = true;
-          this.isRefreshing = true;
-
-          try {
-            await this.refreshToken();
-            this.processQueue(null);
-
-            this.isRefreshing = false;
-            return this.instance(originalRequest!);
-          } catch (err) {
-            this.processQueue(err);
-            this.isRefreshing = false;
-            return Promise.reject(err);
-          }
+        if (error.response?.status === 401) {
+          this.options.setAuthenticated?.(false);
         }
 
         return Promise.reject(error);
