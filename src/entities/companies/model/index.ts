@@ -19,7 +19,7 @@ interface ICompanyContract {
   issue_date: Date | string;
 }
 
-interface ICompanyImage extends Pick<IBaseEntity, 'name' | 'createdAt'> {
+export interface ICompanyImage extends Pick<IBaseEntity, 'name' | 'createdAt'> {
   filepath: string;
   thumbpath: string;
 }

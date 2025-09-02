@@ -1,22 +1,7 @@
-import { fetchGetCompany } from '@entities/companies/api';
-import { companyDetailsStore } from '@entities/companies/model/companyDetalis.store.ts';
-import { fetchGetContact } from '@entities/contacts/api';
-import { contactsDetailsStore } from '@entities/contacts/model/contactsDetalis.store.ts';
-import type { IEntityDetailsLoaderResponse } from '@entities/entityDetails/model/types.ts';
+import companyStore from '@entities/companies/model/company.store.ts';
 
-export const detailsLoader = async <T>(): Promise<IEntityDetailsLoaderResponse<T>> => {
-  const response = await fetchGetCompany();
-  const contacts = await fetchGetContact();
+export const detailsLoader = async ({ params }: { params: { id: string } }) => {
+  await companyStore.getById(params.id);
 
-  companyDetailsStore.setData(response.data);
-  contactsDetailsStore.setData({
-    ...contacts.data,
-    fullName: `${contacts.data.firstname} ${contacts.data.lastname}`,
-  });
-  return {
-    payload: {
-      details: response.data as T,
-      contacts: contacts.data,
-    },
-  };
+  return null;
 };

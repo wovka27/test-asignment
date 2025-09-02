@@ -1,6 +1,6 @@
 import { data } from '@pages/MainPage/config/detailsData.ts';
 
-import EntityDetails from '@widgets/EntityDetails';
+import EntityDetails from '@widgets/EditableItem';
 
 export const MainPage = () => {
   return (

@@ -1,4 +1,4 @@
-import type { EntityDetailsProps } from '@widgets/EntityDetails/model';
+import type { EntityDetailsProps } from '@widgets/EditableItem/model';
 import Header from '@widgets/Header';
 
 import ContentRow from '@features/content-block';
@@ -6,18 +6,18 @@ import Photos from '@features/photos';
 
 import { entityComponentFormRegistry } from '@entities/entityDetails/config';
 
-import './entity-details.scss';
+import './editable-item.scss';
+import { observer } from 'mobx-react';
 
-export const EntityDetails: EntityDetailsProps = ({
+export const EditableItem: EntityDetailsProps = ({
   data,
   headerOnRemove,
   headerTitle,
   isHeader = true,
   hideActions,
+  store,
   photosData,
   headerOnEdit,
-  photosOnUpload,
-  photosOnRemove,
 }) => {
   const Items = () => {
     return data.map((item) => {
@@ -28,20 +28,13 @@ export const EntityDetails: EntityDetailsProps = ({
           key={item.titleText}
           {...item}
         />
-      )
+      );
     });
   };
 
-  const PhotosSection = () => {
-    return photosData ? (
-      <Photos
-        data={photosData || []}
-        title={'Photos'}
-        onRemove={photosOnRemove!}
-        onUpload={photosOnUpload!}
-      />
-    ) : null;
-  };
+  const PhotosSection = observer(() => {
+    return store ? <Photos store={store} /> : null;
+  });
 
   const IsHeader = () => {
     return isHeader ? (
@@ -55,7 +48,7 @@ export const EntityDetails: EntityDetailsProps = ({
   };
 
   return (
-    <div className="entity-details container">
+    <div className="editable-item container">
       <IsHeader />
       <Items />
       <PhotosSection />

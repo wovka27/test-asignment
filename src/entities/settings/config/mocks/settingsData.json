@@ -1,0 +1,22 @@
+{
+  "subscription": {
+    "plan": "premium",
+    "status": "No",
+    "renewal_date": "2025-12-01"
+  },
+  "security": {
+    "two_factor_enabled": "No",
+    "last_password_change": "2025-08-15",
+    "login_alerts": "No"
+  },
+  "notifications": {
+    "email_notifications": "No",
+    "sms_notifications": "No",
+    "push_notifications": "No"
+  },
+  "preferences": {
+    "language": "en",
+    "time_zone": "Europe/Moscow",
+    "theme": "light"
+  }
+}

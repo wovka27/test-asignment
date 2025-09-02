@@ -78,10 +78,10 @@ export class HttpClient implements IHttpClient {
           originalRequest._retryCount = 0;
         }
 
-        const maxRetries = 3;
+        const MAX_RETRIES = 10;
 
         if (!error.response) {
-          if (originalRequest._retryCount < maxRetries) {
+          if (originalRequest._retryCount < MAX_RETRIES) {
             originalRequest._retryCount++;
             console.warn(`Network error, retrying... (${originalRequest._retryCount})`);
             return this.instance(originalRequest);
@@ -90,7 +90,7 @@ export class HttpClient implements IHttpClient {
         }
 
         if (error.response.status === 500) {
-          if (originalRequest._retryCount < maxRetries) {
+          if (originalRequest._retryCount < MAX_RETRIES) {
             originalRequest._retryCount++;
             console.warn(`Server error 500, retrying... (${originalRequest._retryCount})`);
             return this.instance(originalRequest);

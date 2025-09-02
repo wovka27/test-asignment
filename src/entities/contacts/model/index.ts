@@ -7,10 +7,10 @@ export interface IContact extends Partial<Omit<IBaseEntity, 'name'>> {
   email: string;
 }
 
-export interface IContactFormData {
+export interface IContactFormData
+  extends Pick<IBaseEntity, 'id'>,
+    Pick<IContact, 'email' | 'phone'> {
   fullName: string;
-  phone: string;
-  email: string;
 }
 
 export type ContactRequestData = Partial<

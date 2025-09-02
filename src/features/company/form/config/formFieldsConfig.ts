@@ -8,16 +8,16 @@ export const fields = [
         label: 'Agreement number:',
         props: {
           placeholder: '1624/2-24',
-          style: { maxWidth: '188.5px' },
+          style: { width: '188.5px' },
         },
       },
       {
-        type: 'input',
+        type: 'date',
         name: 'contract.issue_date',
         inline: true,
         label: 'Date:',
         props: {
-          style: { maxWidth: '188.5px' },
+          style: { width: '188.5px' },
         },
       },
     ],

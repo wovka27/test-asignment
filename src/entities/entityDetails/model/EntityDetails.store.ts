@@ -1,7 +1,9 @@
 import { makeAutoObservable } from 'mobx';
 
 export default class EntityDetailsStore<Data> {
-  constructor(public data: Data) {
+  public data: Data | null = null;
+
+  constructor() {
     makeAutoObservable(this);
   }
 

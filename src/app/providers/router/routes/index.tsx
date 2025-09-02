@@ -4,6 +4,7 @@ import LayoutWrapper from '@app/layouts/wrapper';
 import { authorizedRoutes } from '@app/providers/router/routes/authorized-routes';
 import { unauthorizedRoutes } from '@app/providers/router/routes/unauthorized-routes';
 
+import NetWorkErrorPage from '@pages/NetWorkErrorPage';
 import NotFoundPage from '@pages/NotFoundPage';
 
 const notFoundRouteParams = {
@@ -28,6 +29,14 @@ const routes: RouteObject[] = [
       {
         path: '404',
         ...notFoundRouteParams,
+      },
+      {
+        path: '/network-error',
+        element: <NetWorkErrorPage />,
+        handle: {
+          layout: 'main',
+          hideMenu: true,
+        },
       },
     ],
   },

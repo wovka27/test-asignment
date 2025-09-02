@@ -84,13 +84,15 @@ svg * {
 a {
   color: inherit;
 
-  @include hover {
-    color: var(--color-accent);
-  }
 
   &[class] {
     text-decoration: none;
   }
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  opacity: 0;
+  -webkit-appearance: none;
 }
 
 a,

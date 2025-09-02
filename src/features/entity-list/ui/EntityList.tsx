@@ -1,11 +1,12 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import ContentRow from '@features/content-block';
-import mockDataList from '@features/entity-list/config/mocks/mockDataList.json';
+
+import type { ICompany } from '@entities/companies/model';
 
 import './entity-list.scss';
 
-export const EntityList = () => {
+export function EntityList<T extends ICompany>({ list }: { list: T[] }) {
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
@@ -14,18 +15,26 @@ export const EntityList = () => {
   };
   return (
     <div className="container container-flex-column">
-      {mockDataList.map((item) => (
+      {list.map((item) => (
         <EntityListItem
-          name={item.name}
+          name={item.name!}
           title={item.shortName}
           key={item.id}
-          onClick={handleClick(item.id)}
+          onClick={handleClick(item.id!)}
         />
       ))}
     </div>
   );
-};
+}
 
-const EntityListItem = ({ title, onClick, name }) => {
+const EntityListItem = ({
+  title,
+  onClick,
+  name,
+}: {
+  title: string;
+  onClick: () => void;
+  name: string;
+}) => {
   return <ContentRow data={[{ label: 'Name', value: name }]} onEdit={onClick} titleText={title} />;
 };

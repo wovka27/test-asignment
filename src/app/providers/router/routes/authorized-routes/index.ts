@@ -1,14 +1,23 @@
 import type { RouteObject } from 'react-router-dom';
 
+import ClientDetailsPage from '@pages/ClientDetailsPage';
+import ClientListPage from '@pages/ClientListPage';
 import CompanyDetailsPage from '@pages/CompanyDetailsPage';
+import CompanyListPage from '@pages/CompanyListPage';
+import ContractDetailsPage from '@pages/ContractDetailsPage';
+import ContractListPage from '@pages/ContractListPage';
 import { MainPage } from '@pages/MainPage';
 import SettingsPage from '@pages/SettingsPage';
 import { settingDetailsLoader } from '@pages/SettingsPage/api/settingDetailsLoader.ts';
 
 import { privateLoader } from '@features/auth/ui/privateLoader';
-import EntityList from '@features/entity-list';
+import { clientListLoader } from '@features/client-list/api/clientListLoader.ts';
+import { companyListLoader } from '@features/company-list/api/companyListLoader.ts';
+import { contractListLoader } from '@features/contract-list/api/contractListLoader.ts';
 
-import { detailsLoader } from '@entities/entityDetails/api/detailsLoader.ts';
+import { clientDetailsLoader } from '@entities/clients/api/clientDetailsLoader.ts';
+import { contractDetailsLoader } from '@entities/contracts/api/contractDetailsLoader.ts';
+import { companyDetailsLoader } from '@entities/companies/api/companyDetailsLoader.ts';
 
 const routes: RouteObject[] = [
   {
@@ -28,70 +37,68 @@ const routes: RouteObject[] = [
       layout: 'main',
       hideMenu: true,
       isSelectedInMenu: true,
-      menuParent: '/settings'
+      menuParent: '/settings',
     },
   },
   {
-    loader: privateLoader,
-    children: [
-      {
-        path: 'companies',
-        Component: EntityList,
-        handle: {
-          layout: 'main',
-          entity_type: 'organization',
-          menuParent: '/companies',
-        },
-      },
-      {
-        path: 'companies/:id',
-        Component: CompanyDetailsPage,
-        loader: detailsLoader,
-        handle: {
-          layout: 'main',
-          entity_type: 'organization',
-          menuParent: '/companies',
-        },
-      },
-      {
-        path: 'contractors',
-        Component: EntityList,
-        handle: {
-          layout: 'main',
-          entity_type: 'contractor',
-          menuParent: '/companies',
-        },
-      },
-      {
-        path: 'contractors/:id',
-        Component: CompanyDetailsPage,
-        loader: detailsLoader,
-        handle: {
-          layout: 'main',
-          entity_type: 'contractor',
-          menuParent: '/companies',
-        },
-      },
-      {
-        path: 'clients',
-        Component: EntityList,
-        handle: {
-          layout: 'main',
-          entity_type: 'client',
-          menuParent: '/companies',
-        },
-      },
-      {
-        path: 'clients/:id',
-        Component: CompanyDetailsPage,
-        loader: detailsLoader,
-        handle: {
-          layout: 'main',
-          entity_type: 'client',
-          menuParent: '/companies',
-        },
-      },
-    ],
+    path: 'companies',
+    Component: CompanyListPage,
+    loader: companyListLoader,
+    handle: {
+      layout: 'main',
+      entity_type: 'organization',
+      menuParent: '/companies',
+    },
+  },
+  {
+    path: 'companies/:id',
+    Component: CompanyDetailsPage,
+    loader: companyDetailsLoader,
+    handle: {
+      layout: 'main',
+      entity_type: 'organization',
+      menuParent: '/companies',
+    },
+  },
+  {
+    path: 'contractors',
+    Component: ContractListPage,
+    loader: contractListLoader,
+    handle: {
+      layout: 'main',
+      entity_type: 'contractor',
+      menuParent: '/companies',
+    },
+  },
+  {
+    path: 'contractors/:id',
+    Component: ContractDetailsPage,
+    loader: contractDetailsLoader,
+    handle: {
+      layout: 'main',
+      entity_type: 'contractor',
+      menuParent: '/companies',
+    },
+  },
+  {
+    path: 'clients',
+    Component: ClientListPage,
+    loader: clientListLoader,
+    handle: {
+      layout: 'main',
+      entity_type: 'client',
+      menuParent: '/companies',
+    },
+  },
+  {
+    path: 'clients/:id',
+    Component: ClientDetailsPage,
+    loader: clientDetailsLoader,
+    handle: {
+      layout: 'main',
+      entity_type: 'client',
+      menuParent: '/companies',
+    },
   },
 ];
 
