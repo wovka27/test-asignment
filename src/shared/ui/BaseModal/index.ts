@@ -1,3 +1,3 @@
-import { BaseModal } from '@shared/ui/BaseModal/ui/BaseModal.tsx';
+import BaseModal from '@shared/ui/BaseModal/ui/BaseModal.tsx';
 
 export default BaseModal;

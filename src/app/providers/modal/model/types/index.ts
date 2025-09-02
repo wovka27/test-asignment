@@ -1,3 +1,5 @@
+import type { ZodSchema } from 'zod/v3';
+
 export type ModalType = 'confirm' | 'edit';
 export type ModalSubTypeMap = {
   confirm: 'remove_organization' | 'remove_photo' | 'logout';
@@ -11,11 +13,9 @@ export type ModalStateConfigMapType = {
 export interface ModalPropsMap {
   confirm: {
     text?: string;
-    formId?: string;
   };
   edit: {
     name: string;
-    formId?: string;
   };
 }
 
@@ -41,6 +41,7 @@ export type ModalConfig<T extends ModalType> = {
   title: string;
   cancelButtonText: string;
   confirmButtonText: string;
+  schema?: ZodSchema<ModalPropsMap[T]>;
   props: ModalPropsMap[T];
 };
 

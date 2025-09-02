@@ -1,19 +1,24 @@
-import { useActionState } from 'react';
+import { Controller, useFormContext } from 'react-hook-form';
 
 import type { ModalRegistry } from '@app/providers/modal/model/types';
 
-import './edit-modal.scss';
 import Input from '@shared/ui/Input';
 
-export const EditModal: ModalRegistry['edit'] = ({ name, formId, onSubmit }) => {
-  const [state, action] = useActionState<string>((_: string, payload: unknown): string | Promise<string> => {
-    onSubmit?.(payload);
-    return payload;
-  }, name);
+import './edit-modal.scss';
+
+export const EditModal: ModalRegistry['edit'] = () => {
+  const {
+    control,
+    formState: { errors },
+  } = useFormContext();
+
+  const error = errors.name?.message as string | undefined;
 
   return (
-    <form action={action} id={formId}>
-      <Input name="name" defaultValue={state} />
-    </form>
+    <Controller
+      control={control}
+      name={'name'}
+      render={({ field }) => <Input error={error} {...field} />}
+    />
   );
 };

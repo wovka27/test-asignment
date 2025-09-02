@@ -1,10 +1,10 @@
 import { fields } from '@features/contacts-form/config/formFieldsConfig.ts';
 import { type FormValues, schema } from '@features/contacts-form/model/schema.ts';
 
+import ContactsService from '@entities/contacts/api/Contacts.service.ts';
 import type { EntityComponentFormPropsMap } from '@entities/entityDetails/model/types.ts';
 
 import EntityDetailsForm from '@shared/ui/EntityDetailsForm';
-import ContactsService from '@entities/contacts/api/Contacts.service.ts';
 
 export const ContactsForm: React.FC<EntityComponentFormPropsMap['contacts']> = ({
   initialState,

@@ -53,7 +53,9 @@
     position: absolute;
     left: 0;
     right: 0;
-    box-shadow: 0 rem(2) rem(4) 0 rgba(0, 0, 0, 0.16), 0 rem(-1) rem(4) 0 rgba(0, 0, 0, 0.04);
+    box-shadow:
+      0 rem(2) rem(4) 0 rgba(0, 0, 0, 0.16),
+      0 rem(-1) rem(4) 0 rgba(0, 0, 0, 0.04);
     background: var(--color-light);
     border-radius: var(--border-radius-8);
     max-height: 200px;
@@ -62,7 +64,6 @@
     transition-duration: var(--transition-duration);
     transition-timing-function: ease;
     overflow-y: auto;
-
 
     &.bottom {
       top: calc(100% + 4px);
@@ -81,12 +82,11 @@
     gap: rem(12);
 
     &:hover {
-      background: #0000000D;
+      background: #0000000d;
     }
 
-
     &.selected {
-      background: #0000000D;
+      background: #0000000d;
     }
   }
 

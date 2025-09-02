@@ -9,11 +9,7 @@
       "no": "1624/2-24",
       "issue_date": "2024-03-12T00:00:00Z"
     },
-    "type": [
-      "funeral_home",
-      "logistics_services",
-      "burial_care_contractor"
-    ],
+    "type": ["funeral_home", "logistics_services", "burial_care_contractor"],
     "status": "active",
     "createdAt": "2024-11-21T08:03:00Z",
     "updatedAt": "2024-11-23T09:30:00Z",
@@ -48,9 +44,7 @@
       "no": "1835/5-24",
       "issue_date": "2024-05-14T00:00:00Z"
     },
-    "type": [
-      "logistics_services"
-    ],
+    "type": ["logistics_services"],
     "status": "inactive",
     "createdAt": "2024-10-12T11:00:00Z",
     "updatedAt": "2024-11-15T09:45:00Z",
@@ -85,10 +79,7 @@
       "no": "1940/7-24",
       "issue_date": "2024-07-03T00:00:00Z"
     },
-    "type": [
-      "funeral_home",
-      "burial_care_contractor"
-    ],
+    "type": ["funeral_home", "burial_care_contractor"],
     "status": "pending",
     "createdAt": "2024-09-01T10:20:00Z",
     "updatedAt": "2024-11-12T15:15:00Z",
@@ -123,9 +114,7 @@
       "no": "2021/10-24",
       "issue_date": "2024-10-15T00:00:00Z"
     },
-    "type": [
-      "funeral_home"
-    ],
+    "type": ["funeral_home"],
     "status": "active",
     "createdAt": "2024-11-01T07:45:00Z",
     "updatedAt": "2024-11-20T13:25:00Z",
@@ -160,9 +149,7 @@
       "no": "2130/11-24",
       "issue_date": "2024-11-11T00:00:00Z"
     },
-    "type": [
-      "burial_care_contractor"
-    ],
+    "type": ["burial_care_contractor"],
     "status": "inactive",
     "createdAt": "2024-11-11T10:10:00Z",
     "updatedAt": "2024-11-22T11:30:00Z",

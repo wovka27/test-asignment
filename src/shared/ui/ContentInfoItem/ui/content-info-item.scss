@@ -17,7 +17,8 @@
   letter-spacing: rem(0.25);
   padding: rem(4) 0;
 
-  &__body, &__text {
+  &__body,
+  &__text {
     color: rgba(0, 0, 0, 0.8);
   }
 

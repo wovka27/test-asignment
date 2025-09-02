@@ -1,3 +1,5 @@
+import { z } from 'zod/v3';
+
 import type { ModalRegistry, ModalStateConfigMapType } from '@app/providers/modal/model/types';
 
 import ConfirmModal from '@features/confirm-modal';
@@ -16,7 +18,6 @@ export const modalStateConfigMap: ModalStateConfigMapType = {
       cancelButtonText: 'No',
       confirmButtonText: 'Yes, remove',
       props: {
-        formId: 'org-remove',
         text: 'Are you sure you want to remove this Organization?',
       },
     },
@@ -26,7 +27,6 @@ export const modalStateConfigMap: ModalStateConfigMapType = {
       cancelButtonText: 'No',
       confirmButtonText: 'Yes, remove',
       props: {
-        formId: 'photo-remove',
         text: 'Are you sure you want to remove this photo?',
       },
     },
@@ -36,7 +36,6 @@ export const modalStateConfigMap: ModalStateConfigMapType = {
       cancelButtonText: 'No',
       confirmButtonText: 'Yes',
       props: {
-        formId: 'logout',
         text: 'Are you sure you want to logout?',
       },
     },
@@ -47,8 +46,10 @@ export const modalStateConfigMap: ModalStateConfigMapType = {
       title: "Specify the Organization's name",
       cancelButtonText: 'Cancel',
       confirmButtonText: 'Save changes',
+      schema: z.object({
+        name: z.string().min(10, 'Min 10 letters'),
+      }),
       props: {
-        formId: 'edit-org',
         name: '',
       },
     },

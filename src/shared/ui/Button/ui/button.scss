@@ -27,12 +27,14 @@
     font-size: 16px;
   }
 
-  &--filled, &--filled-icon {
+  &--filled,
+  &--filled-icon {
     background: var(--color-brand-primary);
     color: var(--color-light);
     border-color: transparent;
 
-    &:hover, &.is-selected {
+    &:hover,
+    &.is-selected {
       background: #555;
     }
 
@@ -59,7 +61,7 @@
     &:active {
       border-color: #6c3ef8;
       color: #6c3ef8;
-      background: rgba(108, 62, 248, .05);
+      background: rgba(108, 62, 248, 0.05);
     }
   }
 
@@ -90,11 +92,11 @@
     justify-content: center;
 
     &:hover {
-      background: #3B3B3B;
+      background: #3b3b3b;
     }
 
     &:active {
-      background: #9981FF;
+      background: #9981ff;
       color: var(--color-light);
     }
   }
@@ -105,7 +107,7 @@
 
   &:disabled,
   &.is-disabled {
-    opacity: .5;
+    opacity: 0.5;
     cursor: not-allowed;
     pointer-events: none;
   }
@@ -124,10 +126,10 @@
   .btn__spinner {
     width: 16px;
     height: 16px;
-    border: 2px solid rgba(255, 255, 255, .5);
+    border: 2px solid rgba(255, 255, 255, 0.5);
     border-top-color: currentColor;
     border-radius: 50%;
-    animation: spin .8s linear infinite;
+    animation: spin 0.8s linear infinite;
   }
 }
 

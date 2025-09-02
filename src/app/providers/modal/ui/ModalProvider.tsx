@@ -12,7 +12,7 @@ import { modalRegistry } from '@app/providers/modal/lib/modalRegistry.ts';
 import type { ModalContextValue, ModalStateConfig } from '@app/providers/modal/model/types';
 
 import BaseModal from '@shared/ui/BaseModal';
-import { formDataToObject } from '@shared/lib/helpers/formDataToObject.ts';
+import Form from '@shared/ui/Form';
 
 const ModalContext = createContext<ModalContextValue | null>(null);
 
@@ -35,7 +35,7 @@ const ModalProvider: React.FC<PropsWithChildren> = ({ children }) => {
         props: {
           ...config.props,
           onSubmit<T>(data: T) {
-            resolve(formDataToObject<T>(data));
+            resolve(data);
             closeModal();
           },
           onClose() {
@@ -80,17 +80,27 @@ const ModalProvider: React.FC<PropsWithChildren> = ({ children }) => {
       {children}
       {ModalComponent && (
         <BaseModal
+          id={modal?.props.formId}
           ref={dialogRef}
           modalKey={id}
-          title={modal?.title || 'Modal title'}
-          formId={modal?.props?.formId || ''}
-          confirmButtonText={modal?.confirmButtonText || 'submit'}
-          cancelButtonText={modal?.cancelButtonText || 'cancel'}
-          onCancelForBtn={onCancel}
           onCancel={onCancel}
           onClick={onClick}
         >
-          <ModalComponent {...modal?.props} />
+          <Form
+            onSubmit={modal?.props.onSubmit}
+            schema={modal?.schema}
+            defaultValues={modal?.props}
+          >
+            <BaseModal.Header title={modal?.title || 'Modal title'} />
+            <BaseModal.Body>
+              <ModalComponent {...modal?.props} />
+              <BaseModal.Actions
+                confirmButtonText={modal?.confirmButtonText || 'submit'}
+                cancelButtonText={modal?.cancelButtonText || 'cancel'}
+                onCancelForBtn={onCancel}
+              />
+            </BaseModal.Body>
+          </Form>
         </BaseModal>
       )}
     </ModalContext.Provider>

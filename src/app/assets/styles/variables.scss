@@ -1,17 +1,16 @@
-@use "helpers/index" as *;
+@use 'helpers/index' as *;
 
 :root {
   --color-light: #ffffff;
-  --color-light-body: #E5E5E5;
+  --color-light-body: #e5e5e5;
 
-  --color-brand-primary: #3B3B3B;
+  --color-brand-primary: #3b3b3b;
 
   --color-dark: #000000;
   --color-dark-10: #00000020;
   --color-dark-20: #00000033;
 
-
-  --color-red: #D72323;
+  --color-red: #d72323;
 
   --border: #{rem(1)} solid var(--color-dark-15);
 
@@ -22,7 +21,7 @@
 
   --shadow: 0 0 0 #{rem(3)} #191919;
 
-  --font-family-base: "Poppins", sans-serif;
+  --font-family-base: 'Poppins', sans-serif;
 
   --transition-duration: 0.2s;
 }
