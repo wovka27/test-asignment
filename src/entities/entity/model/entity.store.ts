@@ -1,4 +1,4 @@
-import { makeAutoObservable } from 'mobx';
+import { makeAutoObservable, runInAction } from 'mobx';
 
 import {
   fetchAddCompanyImage,
@@ -27,10 +27,6 @@ export default class EntityStore {
 
   setList = (data: typeof this.list) => {
     this.list = data;
-  };
-
-  changeListItem = (index: number, key: keyof ICompany, data: ICompany[typeof key]) => {
-    this.list[index][key] = data;
   };
 
   addListItem = (item: ICompany) => {
@@ -100,11 +96,14 @@ export default class EntityStore {
 
     if (index !== undefined) {
       fetchDeleteCompanyImage(DETAIL_ENTITY_ID, name).then(() => {
-        this.changeListItem(
-          index,
-          'photos',
-          this.list[index].photos.filter((i) => i.name !== name)
-        );
+        this.setDetails({
+          ...this.details!,
+          photos: this.details!.photos.filter((i) => i.name !== name),
+        });
+        this.setList([
+          ...this.list,
+          { ...this.list[index], photos: this.list[index].photos.filter((i) => i.name !== name) },
+        ]);
       });
     }
   };
@@ -114,7 +113,11 @@ export default class EntityStore {
 
     if (index) {
       fetchAddCompanyImage(DETAIL_ENTITY_ID, formData).then(({ data }) => {
-        this.list[index].photos.push(JSON.parse(data));
+        this.setDetails({ ...this.details!, photos: [...this.details!.photos, JSON.parse(data)] });
+        this.setList([
+          ...this.list,
+          { ...this.list[index], photos: [...this.list[index].photos, JSON.parse(data)] },
+        ]);
       });
     }
   };
