@@ -13,7 +13,7 @@ export interface IEntityDetails {
   photosData?: ICompany['photos'];
   photosOnRemove?: <T>(value: T) => void | Promise<void>;
   photosOnUpload?: (formData: FormData) => void;
-  store: InstanceType<typeof EntityStore>;
+  store?: InstanceType<typeof EntityStore>;
 }
 
 export type EntityDetailsProps = React.FC<IEntityDetails>;

@@ -16,7 +16,6 @@ export const EditableItem: EntityDetailsProps = ({
   isHeader = true,
   hideActions,
   store,
-  photosData,
   headerOnEdit,
 }) => {
   const Items = () => {

@@ -1,11 +1,11 @@
 import { data } from '@pages/MainPage/config/detailsData.ts';
 
-import EntityDetails from '@widgets/EditableItem';
+import EditableItem from '@widgets/EditableItem';
 
 export const MainPage = () => {
   return (
     <div className="container-flex-column">
-      <EntityDetails data={data} isHeader={false} hideActions />
+      <EditableItem data={data} isHeader={false} hideActions />
     </div>
   );
 };
