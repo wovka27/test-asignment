@@ -12,6 +12,6 @@ export const { data } = detailsDataTransformer({
   'The candidate': {
     FIO: 'Демянчук Владимир Юрьевич',
     Email: 'wovka.pb@yandex.ru',
-    'Github repository': 'https://github.com/wovka27/test-asignment',
+    'Repository project': 'https://github.com/wovka27/test-asignment',
   },
 });
