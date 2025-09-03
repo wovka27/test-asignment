@@ -16,7 +16,7 @@ export interface ICompanyFormData
 
 interface ICompanyContract {
   no: string;
-  issue_date: Date | string;
+  issue_date: string;
 }
 
 export interface ICompanyImage extends Pick<IBaseEntity, 'name' | 'createdAt'> {

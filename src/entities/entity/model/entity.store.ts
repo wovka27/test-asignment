@@ -62,7 +62,10 @@ export default class EntityStore {
 
     if (item === undefined) return;
 
-    this.setDetails(item);
+    this.setDetails({
+      ...item,
+      contract: { ...item.contract, issue_date: item.contract.issue_date.split('T')[0] },
+    });
     await contactsStore.getById(item.contactId);
   };
 
