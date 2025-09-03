@@ -33,6 +33,7 @@ export const FormFieldGenerator: FormFieldGeneratorType = observer(({ data }) =>
             case 'date':
             case 'textarea':
             case 'datetime':
+            case 'search':
             case 'input':
               return (
                 <ContentInfoItem

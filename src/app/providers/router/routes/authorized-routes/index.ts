@@ -18,15 +18,26 @@ import { contractListLoader } from '@features/contract-list/api/contractListLoad
 import { clientDetailsLoader } from '@entities/clients/api/clientDetailsLoader.ts';
 import { contractDetailsLoader } from '@entities/contracts/api/contractDetailsLoader.ts';
 import { companyDetailsLoader } from '@entities/companies/api/companyDetailsLoader.ts';
+import { SearchPage } from '@pages/SearchPage/ui/SearchPage.tsx';
+import { searchLoader } from '@pages/SearchPage/api/searchLoader.ts';
 
 const routes: RouteObject[] = [
   {
-    path: '',
+    path: '/',
     loader: privateLoader,
     handle: {
       layout: 'main',
     },
     children: [
+      {
+        path: 'search',
+        Component: SearchPage,
+        loader: searchLoader,
+        handle: {
+          layout: 'main',
+          hideMenu: true,
+        },
+      },
       {
         path: '/',
         Component: MainPage,

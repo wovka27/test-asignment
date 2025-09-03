@@ -14,6 +14,7 @@ export type FormField =
   | IFormFieldInputDate
   | IFormFieldInputDateTime
   | IFormFieldCheckbox
+  | IFormFieldInputSearch
   | IFormFieldSelect;
 
 export interface IFieldBase {
@@ -34,6 +35,13 @@ export interface IFormFieldTextarea extends IContentInfoItem, IFieldBase, IFormF
 
 export interface IFormFieldInputDate extends IContentInfoItem, IFieldBase, IFormFieldProps<Input> {
   type: 'date';
+}
+
+export interface IFormFieldInputSearch
+  extends IContentInfoItem,
+    IFieldBase,
+    IFormFieldProps<Input> {
+  type: 'search';
 }
 
 export interface IFormFieldInputDateTime

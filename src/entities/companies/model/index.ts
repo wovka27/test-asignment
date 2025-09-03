@@ -7,6 +7,7 @@ export interface ICompany extends Partial<IBaseEntity> {
   contract: ICompanyContract;
   type: string[];
   status: string;
+  category?: 'companies' | 'contractors' | 'clients';
   photos: ICompanyImage[];
 }
 
