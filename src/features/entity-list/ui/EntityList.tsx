@@ -13,13 +13,15 @@ export function EntityList<T extends ICompany>({ list }: { list: T[] }) {
   const handleClick = (id: string) => () => {
     navigate(`${pathname}/${id}`);
   };
+
+  console.log(JSON.parse(JSON.stringify(list)));
   return (
     <div className="container container-flex-column">
       {list.map((item) => (
         <EntityListItem
           name={item.name!}
           title={item.shortName}
-          key={item.id}
+          key={item.id + item.shortName + item.name!}
           onClick={handleClick(item.id!)}
         />
       ))}
