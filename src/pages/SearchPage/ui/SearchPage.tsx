@@ -40,21 +40,22 @@ export const SearchPage = observer(() => {
         </Form>
       </SectionContainer>
       <div className="container-flex-column">
-        {!searchStore.filteredLIst.length && (
+        {!searchStore.filteredLIst.length ? (
           <SectionContainer>
             <SectionContainer.Body>
               <h2>No results...</h2>
               <p>Change search params.</p>
             </SectionContainer.Body>
           </SectionContainer>
+        ) : (
+          searchStore.filteredLIst.map((i) => (
+            <SectionContainer key={i.category! + i.id}>
+              <SectionContainer.Header titleText={`${i.name} - <${i.category}>`}>
+                <Button to={`/${i.category}/${i.id}`} variant={'icon'} icon="chevron_right" />
+              </SectionContainer.Header>
+            </SectionContainer>
+          ))
         )}
-        {searchStore.filteredLIst.map((i) => (
-          <SectionContainer key={i.category + i.id}>
-            <SectionContainer.Header titleText={`${i.name} - <${i.category}>`}>
-              <Button to={`/${i.category}/${i.id}`} variant={'icon'} icon="chevron_right" />
-            </SectionContainer.Header>
-          </SectionContainer>
-        ))}
       </div>
     </div>
   );

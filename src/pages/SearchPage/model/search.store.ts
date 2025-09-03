@@ -11,7 +11,6 @@ class SearchPage {
 
   constructor() {
     makeAutoObservable(this);
-    console.log(this.list);
   }
 
   getData = async () => {
