@@ -32,8 +32,8 @@ class SearchPage {
     this.filteredLIst = data;
   };
 
-  filterByName = (name: string) => {
-    this.filteredLIst = searchFilter<ICompany>(this.list, name);
+  filterByName = ({ search }: { search: string }) => {
+    this.filteredLIst = searchFilter<ICompany>(this.list, search);
   };
 }
 

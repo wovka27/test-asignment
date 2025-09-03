@@ -25,13 +25,10 @@ const fields: FormField[] = [
 ];
 
 export const SearchPage = observer(() => {
-  const onSubmit = ({ search }: { search: string }) => {
-    searchStore.filterByName(search);
-  };
   return (
     <div className="container container-flex-column">
       <SectionContainer>
-        <Form schema={schema} onSubmit={onSubmit} defaultValues={{ search: '' }}>
+        <Form schema={schema} onSubmit={searchStore.filterByName} defaultValues={{ search: '' }}>
           <SectionContainer.Header titleText="Search">
             <SectionContainer.Actions
               data={[{ type: 'submit', title: 'Search', icon: 'search' }]}
