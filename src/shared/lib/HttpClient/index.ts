@@ -4,36 +4,17 @@ import CookieHelper from '@shared/lib/Cookie';
 import type {
   IHttpAxiosRequestConfig,
   IHttpClient,
-  IHttpClientFailedQueue,
   IHttpClientOptions,
 } from '@shared/lib/HttpClient/model';
 
 export class HttpClient implements IHttpClient {
   private readonly instance: AxiosInstance;
-  private isRefreshing = false;
-  private failedQueue: IHttpClientFailedQueue[] = [];
 
   constructor(public options: IHttpClientOptions) {
     this.instance = axios.create({ withCredentials: true, ...options });
 
     this.initializeRequestInterceptor();
     this.initializeResponseInterceptor();
-  }
-
-  private processQueue(error: unknown) {
-    this.failedQueue.forEach((prom) => {
-      if (!error) {
-        prom.resolve();
-      } else {
-        prom.reject(error);
-      }
-    });
-    this.failedQueue = [];
-  }
-
-  private async refreshToken(): Promise<void> {
-    if (!this.options.refreshURL) return;
-    await this.instance.post(this.options.refreshURL);
   }
 
   private initializeRequestInterceptor(): void {
