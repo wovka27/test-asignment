@@ -27,8 +27,6 @@ const fields: FormField[] = [
 export const SearchPage = observer(() => {
   const onSubmit = ({ search }: { search: string }) => {
     searchStore.filterByName(search);
-
-    console.log(searchStore.filteredLIst);
   };
   return (
     <div className="container container-flex-column">
