@@ -1,8 +1,6 @@
 import { observer } from 'mobx-react';
 import { useNavigate } from 'react-router-dom';
 
-import { modalStateConfigMap } from '@app/providers/modal/lib/modalRegistry.ts';
-import { useConfirmCloseModal } from '@app/providers/modal/lib/useConfirmCloseModal.ts';
 import { useCurrentRoute } from '@app/providers/router/lib/hooks/useCurrentRoute.ts';
 
 import EditableItem from '@widgets/EditableItem';

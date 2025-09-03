@@ -12,7 +12,6 @@ export const ContactsForm: React.FC<EntityComponentFormPropsMap['contacts']> = (
   initialState,
   setState,
 }) => {
-  const route = useCurrentRoute<{ id: string }, object>();
   return (
     <EntityDetailsForm<FormValues>
       defaultValues={initialState}

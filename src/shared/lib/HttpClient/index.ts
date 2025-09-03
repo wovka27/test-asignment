@@ -83,7 +83,7 @@ export class HttpClient implements IHttpClient {
         if (!error.response) {
           if (originalRequest._retryCount < MAX_RETRIES) {
             originalRequest._retryCount++;
-            console.warn(`Network error, retrying... (${originalRequest._retryCount})`);
+            console.warn(`unknown error, retrying... (${originalRequest._retryCount})`);
             return this.instance(originalRequest);
           }
           return Promise.reject(new Error('Network Error – сервер недоступен.'));
