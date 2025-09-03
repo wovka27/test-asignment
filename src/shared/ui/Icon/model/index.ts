@@ -5,6 +5,7 @@ export type IconNameType =
   | 'add_photo'
   | 'inventory'
   | 'chevron'
+  | 'chevron_right'
   | 'trash'
   | 'share'
   | 'edit'

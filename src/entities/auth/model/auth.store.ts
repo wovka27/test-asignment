@@ -4,7 +4,6 @@ import CookieHelper from '@shared/lib/Cookie';
 
 class AuthStore {
   isAuthenticated: boolean = false;
-  _checked: boolean = false;
 
   constructor() {
     makeAutoObservable(this);
@@ -15,9 +14,7 @@ class AuthStore {
   }
 
   async checkAuth() {
-    if (this._checked) return;
-
-    this._checked = this.isAuthenticated = !!CookieHelper.get('token');
+    this.isAuthenticated = !!CookieHelper.get('token');
   }
 
   clear() {

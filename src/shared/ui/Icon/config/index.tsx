@@ -253,6 +253,29 @@ export const iconMap: Record<IconNameType, React.JSX.Element> = {
       />
     </>
   ),
+  chevron_right: (
+    <>
+      <rect
+        id="Chevron"
+        width="20.000000"
+        height="20.000000"
+        x="0.000000"
+        y="0.000000"
+        fill="rgb(255,255,255)"
+        fillOpacity="0"
+      />
+      <path id="Vector" d="M0 0L20 0L20 20L0 20L0 0Z" fillRule="nonzero" />
+      <path
+        id="Icon"
+        d="M7 4 L13 10 L7 16"
+        fill="none"
+        stroke="white"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="1.5"
+      />
+    </>
+  ),
   chevron: (
     <>
       <rect

@@ -51,9 +51,7 @@ export const SearchPage = observer(() => {
         {searchStore.filteredLIst.map((i) => (
           <SectionContainer key={i.category + i.id}>
             <SectionContainer.Header titleText={`${i.name} - <${i.category}>`}>
-              <Button to={`/${i.category}/${i.id}`} variant={'flat'} icon="company">
-                View
-              </Button>
+              <Button to={`/${i.category}/${i.id}`} variant={'icon'} icon="chevron_right" />
             </SectionContainer.Header>
           </SectionContainer>
         ))}

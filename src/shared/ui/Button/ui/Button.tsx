@@ -90,11 +90,11 @@ export const Button: ButtonProps = (props) => {
   const { type, ref, ...btnRest } = rest as AsButton;
   return (
     <button
-      {...(btnRest as Omit<AsButton, keyof CommonProps>)}
       type={type ?? 'button'}
       className={classes}
       disabled={disabled || loading}
       ref={ref}
+      {...(btnRest as Omit<AsButton, keyof CommonProps>)}
     >
       {content}
     </button>
