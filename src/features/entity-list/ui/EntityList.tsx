@@ -14,7 +14,6 @@ export function EntityList<T extends ICompany>({ list }: { list: T[] }) {
     navigate(`${pathname}/${id}`);
   };
 
-  console.log(JSON.parse(JSON.stringify(list)));
   return (
     <div className="container container-flex-column">
       {list.map((item) => (
