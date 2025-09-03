@@ -36,6 +36,7 @@ const routes: RouteObject[] = [
         handle: {
           layout: 'main',
           hideMenu: true,
+          menuParent: '/search',
         },
       },
       {
