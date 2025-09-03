@@ -7,6 +7,8 @@ import CompanyListPage from '@pages/CompanyListPage';
 import ContractDetailsPage from '@pages/ContractDetailsPage';
 import ContractListPage from '@pages/ContractListPage';
 import { MainPage } from '@pages/MainPage';
+import { searchLoader } from '@pages/SearchPage/api/searchLoader.ts';
+import { SearchPage } from '@pages/SearchPage/ui/SearchPage.tsx';
 import SettingsPage from '@pages/SettingsPage';
 import { settingDetailsLoader } from '@pages/SettingsPage/api/settingDetailsLoader.ts';
 
@@ -16,10 +18,8 @@ import { companyListLoader } from '@features/company-list/api/companyListLoader.
 import { contractListLoader } from '@features/contract-list/api/contractListLoader.ts';
 
 import { clientDetailsLoader } from '@entities/clients/api/clientDetailsLoader.ts';
-import { contractDetailsLoader } from '@entities/contracts/api/contractDetailsLoader.ts';
 import { companyDetailsLoader } from '@entities/companies/api/companyDetailsLoader.ts';
-import { SearchPage } from '@pages/SearchPage/ui/SearchPage.tsx';
-import { searchLoader } from '@pages/SearchPage/api/searchLoader.ts';
+import { contractDetailsLoader } from '@entities/contracts/api/contractDetailsLoader.ts';
 
 const routes: RouteObject[] = [
   {

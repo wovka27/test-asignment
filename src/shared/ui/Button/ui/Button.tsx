@@ -29,13 +29,13 @@ export const Button: ButtonProps = (props) => {
 
   const content = (
     <>
-      {icon && (
+      {loading && <span className="btn__spinner" />}
+      {icon && !loading && (
         <span className="btn__icon">
           <Icon width={16} height={16} name={icon}></Icon>
         </span>
       )}
       {children && <span className="btn__label">{children}</span>}
-      {loading && <span className="btn__spinner" />}
     </>
   );
 

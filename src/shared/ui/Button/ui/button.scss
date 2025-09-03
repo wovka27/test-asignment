@@ -1,4 +1,7 @@
 .btn {
+  &:has(.btn__spinner) {
+    width: 100%;
+  }
   position: relative;
   display: inline-flex;
   align-items: center;

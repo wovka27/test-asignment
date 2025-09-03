@@ -67,7 +67,7 @@ export class HttpClient implements IHttpClient {
             console.warn(`unknown error, retrying... (${originalRequest._retryCount})`);
             return this.instance(originalRequest);
           }
-          return Promise.reject(new Error('Network Error – сервер недоступен.'));
+          return Promise.reject(new Error('Unknown Error'));
         }
 
         if (error.response.status === 500) {

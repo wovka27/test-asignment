@@ -7,6 +7,7 @@ export interface IMenuList {
 export interface IMenuListItem {
   iconName?: IconNameType;
   to: string;
+  isLoading?: boolean;
 }
 
 export type EntityType = 'organization' | 'contractor' | 'client';
