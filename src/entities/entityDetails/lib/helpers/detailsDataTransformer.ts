@@ -26,8 +26,8 @@ export const detailsDataTransformer: DetailsDataTransformerType = (
 
       return {
         titleText,
-        componentFormRegistryKey: isFormKey(componentFormRegistryKey)
-          ? componentFormRegistryKey
+        componentFormRegistryKey: componentFormRegistryKey
+          ? formKey(componentFormRegistryKey)
           : undefined,
         data: toArrayOptions(detailsData),
         ...(formDataState &&
@@ -44,7 +44,6 @@ const toArrayOptions = (obj: ObjType): Array<{ value: string; label: string }> =
   }));
 };
 
-function isFormKey(key: string | undefined): key is keyof EntityComponentFormPropsMap {
-  if (!key) return false;
-  return key in ({} as EntityComponentFormPropsMap);
+function formKey(key: string) {
+  return key as keyof EntityComponentFormPropsMap;
 }
