@@ -66,6 +66,7 @@ export default class EntityStore {
   };
 
   updateById = async (id: string, data: ICompany) => {
+    console.log(id);
     // Это не костыль просто демонстрация получения деталки для тестового
     if (id === DETAIL_ENTITY_ID) {
       const response = await fetchUpdateCompany(id, data);
