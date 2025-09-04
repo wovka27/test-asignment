@@ -1,12 +1,11 @@
-import { privateLoader } from '@features/auth/ui/privateLoader';
+import type { RouteObject } from 'react-router-dom';
 
 import contractStore from '@entities/contracts/model/contract.store.ts';
 import { checkDetailsLoader } from '@entities/entity/api/checkDetailsLoader.ts';
 
-export const contractDetailsLoader = async ({ params }: { params: { id: string } }) => {
-  await privateLoader();
-  await checkDetailsLoader(contractStore.list, params.id, 'contractors');
-  await contractStore.getById(params.id);
+export const contractDetailsLoader: RouteObject['loader'] = async ({ params }) => {
+  await checkDetailsLoader(contractStore.list, params.id!, 'contractors');
+  await contractStore.getById(params.id!);
 
   return null;
 };
