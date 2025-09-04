@@ -62,12 +62,21 @@ export class HttpClient implements IHttpClient {
         const MAX_RETRIES = 10;
 
         if (!error.response) {
-          if (originalRequest._retryCount < MAX_RETRIES) {
-            originalRequest._retryCount++;
-            console.warn(`unknown error, retrying... (${originalRequest._retryCount})`);
-            return this.instance(originalRequest);
+          const code = (error as AxiosError & { code?: string }).code;
+
+          if (code === 'ERR_NETWORK' || code === 'ERR_CONNECTION_CLOSED') {
+            console.error('Сетевой сбой:', code, error.message);
+
+            if (originalRequest._retryCount < MAX_RETRIES) {
+              originalRequest._retryCount++;
+              console.warn(`Network error, retrying... (${originalRequest._retryCount})`);
+              return this.instance(originalRequest);
+            }
+
+            return Promise.reject(new Error('Проблемы с сетью. Проверьте соединение.'));
           }
-          return Promise.reject(new Error('Unknown Error'));
+
+          return Promise.reject(new Error(`Неизвестная ошибка: ${error.message}`));
         }
 
         if (error.response.status === 500) {
