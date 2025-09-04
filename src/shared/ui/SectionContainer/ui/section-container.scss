@@ -4,6 +4,7 @@
   border-radius: var(--border-radius-16);
   background-color: var(--color-light);
   box-shadow: 0 rem(3) rem(8) 0 rgba(0, 0, 0, 0.12);
+  transition-duration: var(--transition-duration);
   transition-property: box-shadow;
   transition-timing-function: ease-in-out;
   display: flex;
