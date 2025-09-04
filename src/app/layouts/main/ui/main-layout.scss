@@ -1,11 +1,19 @@
 .main-layout {
+  position: relative;
   height: 100vh;
   display: grid;
   grid-template-columns: max-content 1fr;
 }
 
 .main-layout__inner {
- 
+
+}
+
+.main-layout__loader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
 }
 
 .main-layout__content {

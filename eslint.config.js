@@ -2,6 +2,7 @@ import js from '@eslint/js';
 import prettierPlugin from 'eslint-plugin-prettier';
 import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
+import unusedImportsPlugin from 'eslint-plugin-unused-imports';
 import { globalIgnores } from 'eslint/config';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
@@ -13,9 +14,15 @@ export default tseslint.config([
 
     plugins: {
       prettier: prettierPlugin,
+      'unused-imports': unusedImportsPlugin,
     },
     rules: {
       'prettier/prettier': 'error',
+      'unused-imports/no-unused-imports': 'error',
+      'unused-imports/no-unused-vars': [
+        'warn',
+        { vars: 'all', varsIgnorePattern: '^_', argsIgnorePattern: '^_' },
+      ],
     },
     extends: [
       js.configs.recommended,

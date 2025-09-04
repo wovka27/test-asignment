@@ -1,28 +1,16 @@
 import clsx from 'clsx';
 import { Link, useNavigation } from 'react-router-dom';
 
-
-
 import { useCurrentRoute } from '@app/providers/router/lib/hooks/useCurrentRoute.ts';
-
-
 
 import { menuItems } from '@widgets/AsideMenu/ui/MenuList/config/menuItemList.ts';
 import { MenuList } from '@widgets/AsideMenu/ui/MenuList/ui/MenuList.tsx';
-
-
 
 import Button from '@shared/ui/Button';
 import Icon from '@shared/ui/Icon';
 import type { IconNameType } from '@shared/ui/Icon/model';
 
-
-
 import './aside-menu.scss';
-
-
-
-
 
 type EntityType = 'organization' | 'contractor' | 'client';
 
@@ -33,7 +21,6 @@ export const AsideMenu: React.FC = () => {
   const loadingPath = state === 'loading' ? location?.pathname : null;
   const hidden = route?.handle.hideMenu;
   const isCurrentRouteEntityType = route?.handle.entity_type;
-
 
   const btnList: { text: string; icon: IconNameType; to: string; entity_type: EntityType }[] = [
     {

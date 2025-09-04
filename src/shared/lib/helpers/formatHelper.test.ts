@@ -1,5 +1,5 @@
-
 import { describe, expect, it } from 'vitest';
+
 import { FormatHelper } from '@shared/lib/helpers/formatHelper.ts';
 
 describe('FormatHelper', () => {

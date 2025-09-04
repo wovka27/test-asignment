@@ -1,3 +1,5 @@
+import { observer } from 'mobx-react';
+
 import type { EntityDetailsProps } from '@widgets/EditableItem/model';
 import Header from '@widgets/Header';
 
@@ -7,7 +9,6 @@ import Photos from '@features/photos';
 import { entityComponentFormRegistry } from '@entities/entityDetails/config';
 
 import './editable-item.scss';
-import { observer } from 'mobx-react';
 
 export const EditableItem: EntityDetailsProps = ({
   data,

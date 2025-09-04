@@ -1,10 +1,11 @@
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigation } from 'react-router-dom';
 
 import AsideMenu from '@widgets/AsideMenu';
 
 import './main-layout.scss';
 
 export const MainLayout = () => {
+  const { state } = useNavigation();
   return (
     <div className="main-layout">
       <AsideMenu />
@@ -13,6 +14,7 @@ export const MainLayout = () => {
           <Outlet />
         </div>
       </main>
+      {state === 'loading' ? <div className="main-layout__loader loader"></div> : null}
     </div>
   );
 };

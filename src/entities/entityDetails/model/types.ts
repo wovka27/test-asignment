@@ -1,6 +1,7 @@
+import type { ISettingsApi } from '@pages/SettingsPage/model/types.ts';
+
 import type { ICompany } from '@entities/companies/model';
 import type { IContact } from '@entities/contacts/model';
-import type { ISettingsApi } from '@pages/SettingsPage/model/types.ts';
 
 export interface IEntityDetailsLoaderResponse<T> {
   payload: IEntityDetailsLoaderPayload<T>;

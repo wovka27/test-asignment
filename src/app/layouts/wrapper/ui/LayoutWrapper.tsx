@@ -1,8 +1,7 @@
 import { lazy } from 'react';
 
-import { type RouteObject, useMatches } from 'react-router-dom';
-
 import type { LayoutType } from '@app/layouts/model';
+import { useCurrentRoute } from '@app/providers/router/lib/hooks/useCurrentRoute.ts';
 
 const layoutMap: Record<LayoutType, React.LazyExoticComponent<() => React.JSX.Element>> = {
   main: lazy(() => import('@app/layouts/main')),
@@ -10,10 +9,10 @@ const layoutMap: Record<LayoutType, React.LazyExoticComponent<() => React.JSX.El
 };
 
 export const LayoutWrapper = () => {
-  const routes = useMatches();
+  const route = useCurrentRoute<object, { layout: string }>();
 
-  const layout = routes.at(-1) as RouteObject & { handle?: { layout: LayoutType } };
-  const Component = layoutMap[layout?.handle.layout as LayoutType];
+  const layout = route?.handle.layout;
+  const Component = layoutMap[layout as LayoutType];
 
   return <Component />;
 };

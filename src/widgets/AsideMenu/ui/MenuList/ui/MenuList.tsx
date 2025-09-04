@@ -1,7 +1,7 @@
 import { memo, useMemo } from 'react';
 
 import clsx from 'clsx';
-import { useLocation, useNavigation } from 'react-router-dom';
+import { useNavigation } from 'react-router-dom';
 
 import { useCurrentRoute } from '@app/providers/router/lib/hooks/useCurrentRoute.ts';
 

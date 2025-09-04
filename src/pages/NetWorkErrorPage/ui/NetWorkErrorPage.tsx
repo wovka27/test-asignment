@@ -1,7 +1,8 @@
+import { useNavigate } from 'react-router-dom';
+
 import Button from '@shared/ui/Button';
 
 import './network-error-page.scss';
-import { useNavigate } from 'react-router-dom';
 
 export const NetWorkErrorPage = () => {
   const navigate = useNavigate();

@@ -2,11 +2,7 @@ import { makeAutoObservable } from 'mobx';
 
 import companyStore from '@entities/companies/model/company.store.ts';
 import { fetchGetContact, fetchUpdateContact } from '@entities/contacts/api';
-import type {
-  ContactRequestData,
-  IContact,
-  IContactFormData,
-} from '@entities/contacts/model/index.ts';
+import type { ContactRequestData, IContactFormData } from '@entities/contacts/model/index.ts';
 
 class ContactsStore {
   data: IContactFormData | null = null;

@@ -1,5 +1,3 @@
-import { useCurrentRoute } from '@app/providers/router/lib/hooks/useCurrentRoute.ts';
-
 import { fields } from '@features/contacts-form/config/formFieldsConfig.ts';
 import { type FormValues, schema } from '@features/contacts-form/model/schema.ts';
 
