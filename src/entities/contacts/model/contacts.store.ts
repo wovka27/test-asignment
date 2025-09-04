@@ -40,8 +40,6 @@ class ContactsStore {
       email: data.email,
     };
 
-    console.log('details', companyStore.details);
-
     const response = await fetchUpdateContact(companyStore.details!.contactId, requestData);
 
     if (!response.data) return;
