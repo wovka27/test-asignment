@@ -37,10 +37,6 @@ export default class EntityStore {
     this.list = this.list.filter((_, idx) => idx !== index);
   };
 
-  replaceListItem = (index: number, data: ICompany) => {
-    this.list.splice(index, 1, data);
-  };
-
   getList = async () => {
     if (this.list.length) return;
 
@@ -78,7 +74,16 @@ export default class EntityStore {
     }
 
     this.setDetails({ ...this.details, ...data });
-    this.replaceListItem(this.indexedData.get(id)!, { ...this.details, ...data });
+
+    this.setList(
+      this.list.map((i, index) => {
+        if (this.indexedData.get(id) === index) {
+          return { ...i, ...data };
+        }
+
+        return i;
+      })
+    );
   };
 
   deleteById = async (id: string) => {
