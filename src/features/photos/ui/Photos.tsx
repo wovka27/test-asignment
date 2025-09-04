@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { type ChangeEvent, useCallback, useRef } from 'react';
 
 import clsx from 'clsx';
 import { observer } from 'mobx-react';
@@ -25,9 +25,11 @@ export const Photos: React.FC<{ store: InstanceType<typeof EntityStore> }> = obs
     );
     const inputRef = useRef<HTMLInputElement | null>(null);
 
+    const remove = useCallback(removePhoto, [removePhoto]);
+
     const onClick = () => inputRef.current?.click();
 
-    const onFileSelect = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const onFileSelect = async (event: ChangeEvent<HTMLInputElement>) => {
       const file = event.target.files?.[0];
 
       if (file) {
@@ -49,23 +51,37 @@ export const Photos: React.FC<{ store: InstanceType<typeof EntityStore> }> = obs
         <SectionContainer.Header titleText={'Photos'}>
           <SectionContainer.Actions data={[{ title: 'Add', icon: 'add_photo', onClick }]} />
         </SectionContainer.Header>
-        {store.images.length ? (
-          <SectionContainer.Body>
-            <GrabScrollContainer>
-              <div className={clsx('photos__list')}>
-                {store.images.map((i, index) => (
-                  <ImagePreview
-                    src={i.filepath}
-                    key={i.filepath + index + i.filepath + i.createdAt}
-                    alt={i.name}
-                    onRemove={() => removePhoto(i)}
-                  />
-                ))}
-              </div>
-            </GrabScrollContainer>
-          </SectionContainer.Body>
-        ) : null}
+        <ImagePreviewList list={store.images} onRemove={remove} />
       </SectionContainer>
     );
   }
 );
+
+const ImagePreviewList: React.FC<{
+  list: InstanceType<typeof EntityStore>['list'][number]['photos'];
+  onRemove: (item: InstanceType<typeof EntityStore>['list'][number]['photos'][number]) => void;
+}> = ({ list, onRemove }) => {
+  const remove = useCallback(
+    (i: Parameters<typeof onRemove>[number]) => () => onRemove(i),
+    [onRemove]
+  );
+
+  if (!list.length) return null;
+
+  return (
+    <SectionContainer.Body>
+      <GrabScrollContainer>
+        <div className={clsx('photos__list')}>
+          {list.map((i, index) => (
+            <ImagePreview
+              src={i.filepath}
+              key={i.filepath + index + i.filepath + i.createdAt}
+              alt={i.name}
+              onRemove={remove(i)}
+            />
+          ))}
+        </div>
+      </GrabScrollContainer>
+    </SectionContainer.Body>
+  );
+};

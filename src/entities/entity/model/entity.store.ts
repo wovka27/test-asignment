@@ -111,7 +111,7 @@ export default class EntityStore {
   addImage = async (formData: FormData) => {
     const index = this.indexedData.get(this.details!.id!);
 
-    if (index) {
+    if (index !== undefined) {
       fetchAddCompanyImage(DETAIL_ENTITY_ID, formData).then(({ data }) => {
         this.setDetails({ ...this.details!, photos: [...this.details!.photos, JSON.parse(data)] });
         const filtered = this.list.filter((i) => i.id !== this.list[index].id);

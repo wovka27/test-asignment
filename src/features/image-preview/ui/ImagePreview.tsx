@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { memo, useState } from 'react';
 
 import clsx from 'clsx';
 
@@ -9,27 +9,30 @@ import Image from '@shared/ui/Image';
 
 import './image-preview.scss';
 
-export const ImagePreview: ImagePreviewProps = ({ onRemove, src, alt, ...rest }) => {
-  const [isShowBtn, setIsShowBtn] = useState<boolean>(false);
-  return (
-    <div className={clsx('image-preview')}>
-      {isShowBtn && (
-        <Button
-          onClick={onRemove}
-          className={clsx('image-preview__btn')}
-          variant="filled-icon"
-          size="md"
-          icon="trash"
+export const ImagePreview: ImagePreviewProps = memo(
+  ({ onRemove, src, alt, ...rest }) => {
+    const [isShowBtn, setIsShowBtn] = useState<boolean>(false);
+    return (
+      <div className={clsx('image-preview')}>
+        {isShowBtn && (
+          <Button
+            onClick={onRemove}
+            className={clsx('image-preview__btn')}
+            variant="filled-icon"
+            size="md"
+            icon="trash"
+          />
+        )}
+        <Image
+          width={144}
+          height={108}
+          src={src}
+          alt={alt}
+          onLoadComplete={() => setIsShowBtn(true)}
+          {...rest}
         />
-      )}
-      <Image
-        width={144}
-        height={108}
-        src={src}
-        alt={alt}
-        onLoadComplete={() => setIsShowBtn(true)}
-        {...rest}
-      />
-    </div>
-  );
-};
+      </div>
+    );
+  },
+  (prevProps, nextProps) => prevProps.src !== nextProps.src
+);
