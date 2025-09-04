@@ -3,7 +3,6 @@ import { describe, expect, it, vi } from 'vitest';
 
 import { FormatHelper } from '@shared/lib/helpers';
 
-// Мокаем FormatHelper, чтобы тесты не зависели от его реализации
 vi.mock('@shared/lib/helpers', () => ({
   FormatHelper: {
     formatDate: vi.fn(() => 'formatted-date'),

@@ -4,7 +4,7 @@ import type { ActionType } from '@shared/ui/SectionContainer/model';
 
 export type EntityDetailsFormProps<T> = Omit<FormProps<T>, 'children'> & {
   titleText: string;
-  ariaLabelledby: string;
+  ariaLabelledby?: string;
   fields: FormField[];
   actions?: ActionType[];
 };

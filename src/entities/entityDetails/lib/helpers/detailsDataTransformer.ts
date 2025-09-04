@@ -1,5 +1,7 @@
 import type { IContentRow } from '@features/content-block/model';
 
+import type { EntityComponentFormPropsMap } from '@entities/entityDetails/model/types.ts';
+
 import { FormatHelper } from '@shared/lib/helpers';
 
 type ObjType = Record<string, string | ((format: typeof FormatHelper) => string)>;
@@ -24,7 +26,9 @@ export const detailsDataTransformer: DetailsDataTransformerType = (
 
       return {
         titleText,
-        componentFormRegistryKey,
+        componentFormRegistryKey: isFormKey(componentFormRegistryKey)
+          ? componentFormRegistryKey
+          : undefined,
         data: toArrayOptions(detailsData),
         ...(formDataState &&
           componentFormRegistryKey && { initialState: formDataState[componentFormRegistryKey] }),
@@ -39,3 +43,8 @@ const toArrayOptions = (obj: ObjType): Array<{ value: string; label: string }> =
     value: typeof value === 'string' ? value : value(FormatHelper),
   }));
 };
+
+function isFormKey(key: string | undefined): key is keyof EntityComponentFormPropsMap {
+  if (!key) return false;
+  return key in ({} as EntityComponentFormPropsMap);
+}
