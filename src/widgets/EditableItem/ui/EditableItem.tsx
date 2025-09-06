@@ -6,7 +6,7 @@ import Header from '@widgets/Header';
 import ContentRow from '@features/content-block';
 import Photos from '@features/photos';
 
-import { entityComponentFormRegistry } from '@entities/entityDetails/config';
+import { entityComponentFormRegistry } from '@entities/entity/config';
 
 import './editable-item.scss';
 

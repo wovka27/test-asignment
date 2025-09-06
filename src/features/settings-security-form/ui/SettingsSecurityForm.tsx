@@ -3,7 +3,7 @@ import { observer } from 'mobx-react';
 import { fieldsConfig } from '@features/settings-security-form/config/fieldsConfig.ts';
 import { schema } from '@features/settings-security-form/model/schema';
 
-import type { EntityComponentFormPropsMap } from '@entities/entityDetails/model/types.ts';
+import type { EntityComponentFormPropsMap } from '@entities/entity/model/types.ts';
 import settingsStore from '@entities/settings/model/settings.store.ts';
 
 import EntityDetailsForm from '@shared/ui/EntityDetailsForm';

@@ -62,13 +62,22 @@ export default class EntityStore {
   };
 
   updateById = async (id: string, data: ICompany) => {
-    // Это не костыль просто демонстрация получения деталки для тестового
+    const idx = this.list.findIndex((i) => i.id === id);
     if (id === DETAIL_ENTITY_ID) {
       const response = await fetchUpdateCompany(id, data);
 
       if (!response.data) return;
 
       this.setDetails(response.data);
+      this.setList(
+        this.list.map((i, index) => {
+          if (idx === index) {
+            return { ...i, ...data };
+          }
+
+          return i;
+        })
+      );
       return;
     }
 
@@ -76,7 +85,7 @@ export default class EntityStore {
 
     this.setList(
       this.list.map((i, index) => {
-        if (this.indexedData.get(id) === index) {
+        if (idx === index) {
           return { ...i, ...data };
         }
 
@@ -86,7 +95,7 @@ export default class EntityStore {
   };
 
   deleteById = async (id: string) => {
-    const index = this.indexedData.get(id);
+    const index = this.list.findIndex((i) => i.id === id);
 
     if (index === undefined) return;
 
@@ -97,7 +106,7 @@ export default class EntityStore {
   };
 
   deleteImage = (name: string) => {
-    const index = this.indexedData.get(this.details!.id!);
+    const index = this.list.findIndex((i) => i.id === this.details!.id!);
 
     if (index !== undefined) {
       fetchDeleteCompanyImage(DETAIL_ENTITY_ID, name).then(() => {
@@ -114,9 +123,9 @@ export default class EntityStore {
   };
 
   addImage = async (formData: FormData) => {
-    const index = this.indexedData.get(this.details!.id!);
+    const index = this.list.findIndex((i) => i.id === this.details!.id!);
 
-    if (index !== undefined) {
+    if (index !== -1) {
       fetchAddCompanyImage(DETAIL_ENTITY_ID, formData).then(({ data }) => {
         this.setDetails({ ...this.details!, photos: [...this.details!.photos, JSON.parse(data)] });
         const filtered = this.list.filter((i) => i.id !== this.list[index].id);
@@ -130,14 +139,5 @@ export default class EntityStore {
 
   get images() {
     return this.details?.photos || [];
-  }
-
-  get indexedData() {
-    return new Map(
-      this.list.reduce((acc: [string, number][], item, currentIndex) => {
-        acc[currentIndex] = [item.id!, currentIndex];
-        return acc;
-      }, [])
-    );
   }
 }

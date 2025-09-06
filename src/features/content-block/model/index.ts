@@ -1,4 +1,4 @@
-import type { EntityComponentFormPropsMap } from '@entities/entityDetails/model/types.ts';
+import type { EntityComponentFormPropsMap } from '@entities/entity/model/types.ts';
 
 export interface IContentRow {
   titleText: string;

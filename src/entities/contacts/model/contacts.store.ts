@@ -1,9 +1,9 @@
 import { makeAutoObservable } from 'mobx';
 
-import companyStore from '@entities/companies/model/company.store.ts';
 import { fetchGetContact, fetchUpdateContact } from '@entities/contacts/api';
 import type { ContactRequestData, IContactFormData } from '@entities/contacts/model/index.ts';
 
+const CONTACT_ID = '16';
 class ContactsStore {
   data: IContactFormData | null = null;
 
@@ -40,7 +40,7 @@ class ContactsStore {
       email: data.email,
     };
 
-    const response = await fetchUpdateContact(companyStore.details!.contactId, requestData);
+    const response = await fetchUpdateContact(CONTACT_ID, requestData);
 
     if (!response.data) return;
 

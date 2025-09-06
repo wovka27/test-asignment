@@ -19,7 +19,7 @@ export type CommonProps = {
 
 export type AsButton = CommonProps &
   Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'className' | 'children'> & {
-    to?: never;
+    to?: RouterLinkProps['to'];
     href?: HTMLAnchorElement['href'];
     ref?: React.Ref<HTMLButtonElement>;
   };

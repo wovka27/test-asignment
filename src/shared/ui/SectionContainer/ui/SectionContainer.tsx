@@ -12,31 +12,20 @@ import type {
 
 import './section-container.scss';
 
-const SectionContainer: SectionContainerProps = ({
-  children,
-  className,
-  'aria-labelledby': ariaLabelledby,
-  ...rest
-}) => {
+const SectionContainer: SectionContainerProps = ({ children, className, ...rest }) => {
   return (
-    <div
-      aria-labelledby={ariaLabelledby}
-      className={clsx('section-container', className)}
-      {...rest}
-    >
+    <div className={clsx('section-container', className)} {...rest}>
       {children}
     </div>
   );
 };
 
-const Header: SectionContainerHeaderProps = ({ ariaLabelledby, children, titleText }) => {
+const Header: SectionContainerHeaderProps = ({ children, titleText }) => {
   if (!titleText) return null;
 
   return (
     <div className={clsx('section-container__header')}>
-      <h2 id={ariaLabelledby} className={clsx('section-container__title')}>
-        {titleText}
-      </h2>
+      <h2 className={clsx('section-container__title')}>{titleText}</h2>
       {children}
     </div>
   );

@@ -1,4 +1,4 @@
-import { detailsDataTransformer } from '@entities/entityDetails/lib/helpers';
+import { detailsDataTransformer } from '@entities/entity/lib/helpers';
 
 export const { data } = detailsDataTransformer({
   Main: {

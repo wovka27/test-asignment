@@ -4,7 +4,7 @@ import { fieldsConfig } from '@features/settings-notification-form/config/fields
 import { schema } from '@features/settings-notification-form/model/schema';
 import type { FormValues } from '@features/settings-subscription-form/model/schema.ts';
 
-import type { EntityComponentFormPropsMap } from '@entities/entityDetails/model/types.ts';
+import type { EntityComponentFormPropsMap } from '@entities/entity/model/types.ts';
 import settingsStore from '@entities/settings/model/settings.store.ts';
 
 import EntityDetailsForm from '@shared/ui/EntityDetailsForm';

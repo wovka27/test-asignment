@@ -1,4 +1,4 @@
-import { detailsDataTransformer } from './detailsDataTransformer';
+import { detailsDataTransformer } from './detailsDataTransformer.ts';
 import { describe, expect, it, vi } from 'vitest';
 
 import { FormatHelper } from '@shared/lib/helpers';

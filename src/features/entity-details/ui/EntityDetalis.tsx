@@ -6,8 +6,8 @@ import { useCurrentRoute } from '@app/providers/router/lib/hooks/useCurrentRoute
 import EditableItem from '@widgets/EditableItem';
 
 import contactsStore from '@entities/contacts/model/contacts.store.ts';
+import { detailsDataTransformer } from '@entities/entity/lib/helpers';
 import type EntityStore from '@entities/entity/model/entity.store.ts';
-import { detailsDataTransformer } from '@entities/entityDetails/lib/helpers';
 
 export const EntityDetails: React.FC<{ store: InstanceType<typeof EntityStore> }> = observer(
   ({ store }) => {

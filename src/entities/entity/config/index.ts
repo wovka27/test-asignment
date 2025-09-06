@@ -5,7 +5,7 @@ import SettingsPreferencesForm from '@features/settings-preferences-form';
 import SettingsSecurityForm from '@features/settings-security-form';
 import SettingsSubscriptionForm from '@features/settings-subscription-form';
 
-import type { EntityComponentFormRegistry } from '@entities/entityDetails/model/types.ts';
+import type { EntityComponentFormRegistry } from '@entities/entity/model/types.ts';
 
 export const entityComponentFormRegistry: EntityComponentFormRegistry = {
   contacts: ContactsForm,

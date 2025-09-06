@@ -1,6 +1,6 @@
 import type { IContentRow } from '@features/content-block/model';
 
-import type { EntityComponentFormPropsMap } from '@entities/entityDetails/model/types.ts';
+import type { EntityComponentFormPropsMap } from '@entities/entity/model/types.ts';
 
 import { FormatHelper } from '@shared/lib/helpers';
 

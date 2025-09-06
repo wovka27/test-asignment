@@ -2,7 +2,7 @@ import { observer } from 'mobx-react';
 
 import EntityDetails from '@widgets/EditableItem';
 
-import { detailsDataTransformer } from '@entities/entityDetails/lib/helpers';
+import { detailsDataTransformer } from '@entities/entity/lib/helpers';
 import settingsStore from '@entities/settings/model/settings.store.ts';
 
 export const SettingsPage: React.FC = observer(() => {

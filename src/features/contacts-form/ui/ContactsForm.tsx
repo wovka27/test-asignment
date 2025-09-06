@@ -2,7 +2,7 @@ import { fields } from '@features/contacts-form/config/formFieldsConfig.ts';
 import { type FormValues, schema } from '@features/contacts-form/model/schema.ts';
 
 import contactsStore from '@entities/contacts/model/contacts.store.ts';
-import type { EntityComponentFormPropsMap } from '@entities/entityDetails/model/types.ts';
+import type { EntityComponentFormPropsMap } from '@entities/entity/model/types.ts';
 
 import EntityDetailsForm from '@shared/ui/EntityDetailsForm';
 
