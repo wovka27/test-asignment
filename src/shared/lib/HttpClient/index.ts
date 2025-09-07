@@ -69,22 +69,26 @@ export class HttpClient implements IHttpClient {
 
             if (originalRequest._retryCount < MAX_RETRIES) {
               originalRequest._retryCount++;
+              this.options.onError?.(code, originalRequest._retryCount);
               console.warn(`Network error, retrying... (${originalRequest._retryCount})`);
               return this.instance(originalRequest);
             }
-
+            this.options.onError?.(code, originalRequest._retryCount);
             return Promise.reject(new Error('Проблемы с сетью. Проверьте соединение.'));
           }
 
+          this.options.onError?.('ERR_UNKNOWN', originalRequest._retryCount);
           return Promise.reject(new Error(`Неизвестная ошибка: ${error.message}`));
         }
 
         if (error.response.status === 500) {
           if (originalRequest._retryCount < MAX_RETRIES) {
             originalRequest._retryCount++;
+            this.options.onError?.('ERR_500_RETRYING', originalRequest._retryCount);
             console.warn(`Server error 500, retrying... (${originalRequest._retryCount})`);
             return this.instance(originalRequest);
           }
+          this.options.onError?.('ERR_STATUS_500', originalRequest._retryCount);
           return Promise.reject(new Error('Ошибка сервера (500). Попробуйте позже.'));
         }
 

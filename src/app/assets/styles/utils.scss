@@ -1,8 +1,8 @@
 @use 'helpers' as *;
 
 .container {
-  height: 100%;
   width: rem(640);
+  height: 100%;
   margin-inline: auto;
 }
 
@@ -10,7 +10,7 @@
   display: flex;
   flex-direction: column;
   gap: rem(16);
-  padding: 0 0 rem(32) 0;
+  padding: 0 0 rem(32);
 }
 
 .visually-hidden {
@@ -30,9 +30,10 @@
 }
 
 .loader {
-  height: 4px;
-  width: 130px;
   --c: no-repeat linear-gradient(var(--color-blue-secondary) 0 0);
+
+  width: 130px;
+  height: 4px;
   background: var(--c), var(--c), var(--color-light);
   background-size: 60% 100%;
   animation: l16 3s infinite;
@@ -42,9 +43,11 @@
   0% {
     background-position: -150% 0, -150% 0
   }
+
   66% {
     background-position: 250% 0, -150% 0
   }
+
   100% {
     background-position: 250% 0, 250% 0
   }

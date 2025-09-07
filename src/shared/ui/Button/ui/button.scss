@@ -1,18 +1,18 @@
 .btn {
   position: relative;
   display: inline-flex;
-  align-items: center;
   justify-content: flex-start;
+  align-items: center;
   gap: 6px;
-  border-color: transparent;
+  font-weight: 600;
+  line-height: 1;
+  text-decoration: none;
   border-width: 1px;
   border-style: solid;
+  border-color: transparent;
   border-radius: 8px;
-  font-weight: 600;
-  transition-property: all;
-  text-decoration: none;
-  line-height: 1;
   cursor: pointer;
+  transition-property: all;
   user-select: none;
 
   &--sm {
@@ -32,27 +32,27 @@
 
   &--filled,
   &--filled-icon {
-    background: var(--color-brand-primary);
     color: var(--color-light);
+    background: var(--color-brand-primary);
 
     &:hover,
     &.is-selected {
-      background: #555;
+      background: #555555;
     }
 
     &:active {
-      background: #777;
+      background: #777777;
     }
   }
 
   &--outline {
-    background: #fff;
-    color: #333;
-    border-color: #ccc;
+    color: #333333;
+    background: #ffffff;
+    border-color: #cccccc;
 
     &.is-selected {
-      background: var(--color-brand-primary);
       color: var(--color-light);
+      background: var(--color-brand-primary);
       border: none;
     }
 
@@ -61,15 +61,15 @@
     }
 
     &:active {
-      border-color: var(--color-blue-variant);
       color: var(--color-blue-variant);
       background: var(--color-light);
+      border-color: var(--color-blue-variant);
     }
   }
 
   &--flat {
+    color: #333333;
     background: transparent;
-    color: #333;
     border: none;
 
     &:hover {
@@ -85,13 +85,13 @@
 
   &--icon {
     flex-shrink: 0;
-    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     padding: 6px;
     background: transparent;
     border: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    border-radius: 50%;
 
     &:hover {
       background: rgba(59, 59, 59, 0.05);
@@ -120,8 +120,8 @@
 
   .btn__icon {
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
   }
 
   .btn__spinner {

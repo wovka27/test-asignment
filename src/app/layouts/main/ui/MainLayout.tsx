@@ -1,3 +1,4 @@
+import { Toaster } from 'react-hot-toast';
 import { Outlet, useNavigation } from 'react-router-dom';
 
 import AsideMenu from '@widgets/AsideMenu';
@@ -15,6 +16,7 @@ export const MainLayout = () => {
         </div>
       </main>
       {state === 'loading' ? <div className="main-layout__loader loader"></div> : null}
+      <Toaster />
     </div>
   );
 };

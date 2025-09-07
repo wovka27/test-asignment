@@ -1,9 +1,9 @@
 .image-preview {
   flex-shrink: 0;
   position: relative;
+  overflow: hidden;
   width: rem(144);
   height: rem(108);
-  overflow: hidden;
   border-radius: var(--border-radius-8);
 
   img {

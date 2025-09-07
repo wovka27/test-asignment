@@ -1,6 +1,6 @@
 .aside-menu {
-  height: 100vh;
   display: flex;
+  height: 100vh;
   color: var(--color-light);
   box-shadow: rem(4) 0 rem(16) 0 rgba(0, 0, 0, 0.08);
 }
@@ -9,25 +9,25 @@
   display: flex;
   flex-direction: column;
   row-gap: rem(20);
-  background: var(--color-brand-primary);
-  padding: rem(20) rem(6);
   width: rem(48);
+  padding: rem(20) rem(6);
+  background: var(--color-brand-primary);
 }
 
 .aside-menu__content-footer {
-  color: rgba(0, 0, 0, 0.3);
+  align-self: end;
   font-size: rem(11);
   font-weight: 400;
   line-height: rem(16);
   letter-spacing: rem(0.24);
   text-align: center;
-  align-self: end;
+  color: rgba(0, 0, 0, 0.3);
 }
 
 .aside-menu__content {
   overflow: hidden;
-  background: var(--color-light);
   width: rem(250);
+  background: var(--color-light);
   transition-duration: var(--transition-duration);
   transition-property: width;
 
@@ -40,59 +40,62 @@
 .aside-menu__content-header {
   padding-bottom: rem(20);
   border-bottom: 1px solid var(--color-dark-20);
+
   &__title {
-    color: var(--color-dark);
     font-size: rem(14);
     font-weight: 700;
     line-height: rem(24);
     letter-spacing: rem(0.03);
-  }
-  &__subtitle {
     color: var(--color-dark);
-    opacity: 0.8;
+  }
+
+  &__subtitle {
     font-size: rem(11);
     font-weight: 400;
     line-height: rem(16);
     letter-spacing: rem(0.24);
+    color: var(--color-dark);
+    opacity: 0.8;
   }
 }
 
 .aside-menu__content-inner {
   display: grid;
-  grid-template-columns: 1fr;
   grid-template-rows: max-content max-content 1fr;
+  grid-template-columns: 1fr;
   min-width: max-content;
   height: 100%;
   padding: rem(20);
 }
 
 .aside-menu__list {
-  height: 100%;
   display: flex;
   flex-direction: column;
   row-gap: rem(20);
+  height: 100%;
 }
 
 .aside-menu__item {
   &--empty {
-    position: relative;
     flex-grow: 1;
+    position: relative;
+
     &::after {
-      bottom: 0;
-      left: 50%;
-      translate: -50%;
       content: '';
       position: absolute;
+      bottom: 0;
+      left: 50%;
       width: rem(19);
       height: 1px;
       background: #ffffff20;
+      translate: -50%;
     }
   }
 }
 
 .aside-menu__content-btns {
-  margin-top: rem(20);
   display: flex;
   flex-direction: column;
   row-gap: rem(12);
+  margin-top: rem(20);
 }

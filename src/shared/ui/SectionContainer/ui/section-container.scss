@@ -1,15 +1,15 @@
 .section-container {
+  display: flex;
+  flex-direction: column;
+  row-gap: rem(16);
   height: max-content;
   padding: rem(24);
-  border-radius: var(--border-radius-16);
   background-color: var(--color-light);
+  border-radius: var(--border-radius-16);
   box-shadow: 0 rem(3) rem(8) 0 rgba(0, 0, 0, 0.12);
   transition-duration: var(--transition-duration);
   transition-property: box-shadow;
   transition-timing-function: ease-in-out;
-  display: flex;
-  flex-direction: column;
-  row-gap: rem(16);
 
   @include hover {
     box-shadow: 0 rem(3) rem(8) 0 rgba(0, 0, 0, 0.22);

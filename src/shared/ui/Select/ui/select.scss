@@ -11,10 +11,10 @@
     justify-content: space-between;
     align-items: center;
     padding: rem(10) rem(12);
-    border: 1px solid #ccc;
+    background: var(--color-light);
+    border: 1px solid #cccccc;
     border-radius: var(--border-radius-8);
     cursor: pointer;
-    background: var(--color-light);
     transition-duration: var(--transition-duration);
 
     &--error {
@@ -22,7 +22,7 @@
     }
 
     &:hover {
-      border-color: #666;
+      border-color: #666666;
     }
 
     &.open,
@@ -36,34 +36,33 @@
 
   &__value {
     flex: 1;
-    color: #333;
+    color: #333333;
   }
 
   &__arrow {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin-left: 8px;
   }
 
   &__dropdown {
-    @include hide-scroll();
+    @include hide-scroll;
 
     position: absolute;
-    left: 0;
+    z-index: 10;
     right: 0;
+    left: 0;
+    overflow-y: auto;
+    max-height: 200px;
+    background: var(--color-light);
+    border-radius: var(--border-radius-8);
     box-shadow:
       0 rem(2) rem(4) 0 rgba(0, 0, 0, 0.16),
       0 rem(-1) rem(4) 0 rgba(0, 0, 0, 0.04);
-    background: var(--color-light);
-    border-radius: var(--border-radius-8);
-    max-height: 200px;
-    overflow-y: auto;
-    z-index: 10;
     transition-duration: var(--transition-duration);
     transition-timing-function: ease;
-    overflow-y: auto;
 
     &.bottom {
       top: calc(100% + 4px);
@@ -75,11 +74,11 @@
   }
 
   &__option {
-    padding: rem(16) rem(12);
-    cursor: pointer;
     display: flex;
     align-items: center;
     gap: rem(12);
+    padding: rem(16) rem(12);
+    cursor: pointer;
 
     &:hover {
       background: #0000000d;

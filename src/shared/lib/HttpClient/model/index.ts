@@ -16,11 +16,7 @@ export interface IHttpClient {
 export interface IHttpClientOptions extends CreateAxiosDefaults {
   refreshURL?: string;
   setAuthenticated?: (v: boolean) => void;
-}
-
-export interface IHttpClientFailedQueue {
-  resolve: () => void;
-  reject: <E>(err: E) => void;
+  onError?: (code?: string, count?: number) => void;
 }
 
 export interface IHttpAxiosRequestConfig extends InternalAxiosRequestConfig {

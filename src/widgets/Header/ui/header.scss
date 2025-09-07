@@ -1,10 +1,10 @@
 .header {
   position: relative;
-  width: 100%;
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
   gap: rem(16);
+  width: 100%;
   margin-bottom: rem(16);
 }
 
@@ -17,8 +17,8 @@
 
 .header__actions {
   display: flex;
-  gap: rem(4);
   flex-wrap: nowrap;
+  gap: rem(4);
 
   button:last-child {
     color: var(--color-red);
@@ -28,6 +28,6 @@
 .header__back {
   position: absolute;
   top: 50%;
-  translate: 0 -50%;
   left: rem(-60);
+  translate: 0 -50%;
 }

@@ -91,8 +91,8 @@ a {
 }
 
 input[type="date"]::-webkit-calendar-picker-indicator {
+  appearance: none;
   opacity: 0;
-  -webkit-appearance: none;
 }
 
 a,

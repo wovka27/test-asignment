@@ -128,7 +128,9 @@ export default class EntityStore {
     if (index !== -1) {
       fetchAddCompanyImage(DETAIL_ENTITY_ID, formData).then(({ data }) => {
         this.setDetails({ ...this.details!, photos: [...this.details!.photos, JSON.parse(data)] });
+
         const filtered = this.list.filter((i) => i.id !== this.list[index].id);
+
         this.setList([
           ...filtered,
           { ...this.list[index], photos: [...this.list[index].photos, JSON.parse(data)] },

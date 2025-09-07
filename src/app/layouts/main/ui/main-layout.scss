@@ -1,8 +1,8 @@
 .main-layout {
   position: relative;
-  height: 100vh;
   display: grid;
   grid-template-columns: max-content 1fr;
+  height: 100vh;
 }
 
 .main-layout__inner {
@@ -17,9 +17,10 @@
 }
 
 .main-layout__content {
-  padding: rem(32) 0;
   overflow: auto;
-  min-height: 0;
   height: 100%;
-  @include hide-scroll();
+  min-height: 0;
+  padding: rem(32) 0;
+
+  @include hide-scroll;
 }
