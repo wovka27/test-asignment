@@ -3,10 +3,10 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  row-gap: rem(20);
+  row-gap: 20px;
   height: 100vh;
 
   &__title {
-    font-size: rem(114);
+    font-size: 114px;
   }
 }

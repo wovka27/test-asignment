@@ -51,6 +51,8 @@
     "eslint-plugin-unused-imports": "^4.2.0",
     "globals": "^16.3.0",
     "jsdom": "^26.1.0",
+    "postcss-preset-env": "^10.3.1",
+    "postcss-pxtorem": "^6.1.0",
     "prettier": "^3.6.2",
     "sass": "^1.90.0",
     "stylelint": "^16.23.1",

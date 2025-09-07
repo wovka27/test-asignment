@@ -3,22 +3,22 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: rem(16);
+  gap: 16px;
   width: 100%;
-  margin-bottom: rem(16);
+  margin-bottom: 16px;
 }
 
 .header__title {
-  font-size: rem(28);
+  font-size: 28px;
   font-weight: 500;
-  line-height: rem(40);
+  line-height: 40px;
   letter-spacing: rem(0.25);
 }
 
 .header__actions {
   display: flex;
   flex-wrap: nowrap;
-  gap: rem(4);
+  gap: 4px;
 
   button:last-child {
     color: var(--color-red);

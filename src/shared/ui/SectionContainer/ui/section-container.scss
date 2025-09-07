@@ -1,18 +1,18 @@
 .section-container {
   display: flex;
   flex-direction: column;
-  row-gap: rem(16);
+  row-gap: 16px;
   height: max-content;
-  padding: rem(24);
+  padding: 24px;
   background-color: var(--color-light);
   border-radius: var(--border-radius-16);
-  box-shadow: 0 rem(3) rem(8) 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.12);
   transition-duration: var(--transition-duration);
   transition-property: box-shadow;
   transition-timing-function: ease-in-out;
 
   @include hover {
-    box-shadow: 0 rem(3) rem(8) 0 rgba(0, 0, 0, 0.22);
+    box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.22);
   }
 }
 
@@ -30,5 +30,5 @@
 
 .section-container__header-actions {
   display: flex;
-  gap: rem(12);
+  gap: 12px;
 }

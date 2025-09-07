@@ -1,8 +1,8 @@
 .checkbox {
   display: inline-flex;
   align-items: center;
-  gap: rem(8);
-  padding: rem(4);
+  gap: 8px;
+  padding: 4px;
   cursor: pointer;
   user-select: none;
 
@@ -15,10 +15,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: rem(16);
-    height: rem(16);
+    width: 16px;
+    height: 16px;
     background: white;
-    border: rem(1) solid var(--color-brand-primary);
+    border: 1px solid var(--color-brand-primary);
     border-radius: var(--border-radius-4);
     transition-duration: var(--transition-duration);
   }

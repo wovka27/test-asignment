@@ -2,9 +2,9 @@
 .login-form__form {
   display: flex;
   flex-direction: column;
-  row-gap: rem(20);
+  row-gap: 20px;
 }
 
 .login-form {
-  min-width: rem(500);
+  min-width: 500px;
 }

@@ -1,7 +1,7 @@
 @use 'helpers' as *;
 
 .container {
-  width: rem(640);
+  width: 640px;
   height: 100%;
   margin-inline: auto;
 }
@@ -9,8 +9,8 @@
 .container-flex-column {
   display: flex;
   flex-direction: column;
-  gap: rem(16);
-  padding: 0 0 rem(32);
+  gap: 16px;
+  padding: 0 0 32px;
 }
 
 .visually-hidden {

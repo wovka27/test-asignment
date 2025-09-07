@@ -2,23 +2,23 @@
   display: flex;
   height: 100vh;
   color: var(--color-light);
-  box-shadow: rem(4) 0 rem(16) 0 rgba(0, 0, 0, 0.08);
+  box-shadow: 4px 0 16px 0 rgba(0, 0, 0, 0.08);
 }
 
 .aside-menu__panel {
   display: flex;
   flex-direction: column;
-  row-gap: rem(20);
-  width: rem(48);
-  padding: rem(20) rem(6);
+  row-gap: 20px;
+  width: 48px;
+  padding: 20px 6px;
   background: var(--color-brand-primary);
 }
 
 .aside-menu__content-footer {
   align-self: end;
-  font-size: rem(11);
+  font-size: 11px;
   font-weight: 400;
-  line-height: rem(16);
+  line-height: 16px;
   letter-spacing: rem(0.24);
   text-align: center;
   color: rgba(0, 0, 0, 0.3);
@@ -26,7 +26,7 @@
 
 .aside-menu__content {
   overflow: hidden;
-  width: rem(250);
+  width: 250px;
   background: var(--color-light);
   transition-duration: var(--transition-duration);
   transition-property: width;
@@ -38,21 +38,21 @@
 }
 
 .aside-menu__content-header {
-  padding-bottom: rem(20);
+  padding-bottom: 20px;
   border-bottom: 1px solid var(--color-dark-20);
 
   &__title {
-    font-size: rem(14);
+    font-size: 14px;
     font-weight: 700;
-    line-height: rem(24);
+    line-height: 24px;
     letter-spacing: rem(0.03);
     color: var(--color-dark);
   }
 
   &__subtitle {
-    font-size: rem(11);
+    font-size: 11px;
     font-weight: 400;
-    line-height: rem(16);
+    line-height: 16px;
     letter-spacing: rem(0.24);
     color: var(--color-dark);
     opacity: 0.8;
@@ -65,13 +65,13 @@
   grid-template-columns: 1fr;
   min-width: max-content;
   height: 100%;
-  padding: rem(20);
+  padding: 20px;
 }
 
 .aside-menu__list {
   display: flex;
   flex-direction: column;
-  row-gap: rem(20);
+  row-gap: 20px;
   height: 100%;
 }
 
@@ -85,7 +85,7 @@
       position: absolute;
       bottom: 0;
       left: 50%;
-      width: rem(19);
+      width: 19px;
       height: 1px;
       background: #ffffff20;
       translate: -50%;
@@ -96,6 +96,6 @@
 .aside-menu__content-btns {
   display: flex;
   flex-direction: column;
-  row-gap: rem(12);
-  margin-top: rem(20);
+  row-gap: 12px;
+  margin-top: 20px;
 }

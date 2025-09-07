@@ -2,8 +2,8 @@
   flex-shrink: 0;
   position: relative;
   overflow: hidden;
-  width: rem(144);
-  height: rem(108);
+  width: 144px;
+  height: 108px;
   border-radius: var(--border-radius-8);
 
   img {
@@ -17,6 +17,6 @@
 .image-preview__btn {
   position: absolute;
   z-index: 1;
-  top: rem(8);
-  right: rem(8);
+  top: 8px;
+  right: 8px;
 }
