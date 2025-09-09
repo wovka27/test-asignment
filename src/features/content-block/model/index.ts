@@ -5,7 +5,7 @@ export interface IContentRow {
   hideActions?: boolean;
   onEdit?: (...args: unknown[]) => void;
   componentFormRegistryKey?: keyof EntityComponentFormPropsMap;
-  EntityForm?: React.ReactNode;
+  EntityForm?: unknown;
   initialState?: unknown;
   data: { label: string; value: string }[];
 }

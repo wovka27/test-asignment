@@ -11,7 +11,7 @@ export interface IEntityDetailsLoaderPayload<T> {
   contacts?: IContact;
 }
 
-type EntityComponentFormProps<T> = {
+export type EntityComponentFormProps<T> = {
   setState: (v: boolean) => void;
   initialState: T;
 };

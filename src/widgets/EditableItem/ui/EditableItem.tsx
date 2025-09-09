@@ -6,7 +6,7 @@ import Header from '@widgets/Header';
 import ContentRow from '@features/content-block';
 import Photos from '@features/photos';
 
-import { entityComponentFormRegistry } from '@entities/entity/config';
+import { entityComponentFormRegistry } from '@entities/entity/lib/entityComponentFormRegistry.ts';
 
 import './editable-item.scss';
 
@@ -32,9 +32,9 @@ export const EditableItem: EntityDetailsProps = ({
     });
   };
 
-  const PhotosSection = observer(() => {
+  const PhotosSection = () => {
     return store ? <Photos store={store} /> : null;
-  });
+  };
 
   const IsHeader = () => {
     return isHeader ? (

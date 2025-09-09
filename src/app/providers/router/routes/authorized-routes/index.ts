@@ -13,13 +13,13 @@ import SettingsPage from '@pages/SettingsPage';
 import { settingDetailsLoader } from '@pages/SettingsPage/api/settingDetailsLoader.ts';
 
 import { privateLoader } from '@features/auth/ui/privateLoader';
-import { clientListLoader } from '@features/client-list/api/clientListLoader.ts';
-import { companyListLoader } from '@features/company-list/api/companyListLoader.ts';
-import { contractListLoader } from '@features/contract-list/api/contractListLoader.ts';
+import { clientListLoader } from '@features/client-list/lib/clientListLoader.ts';
+import { companyListLoader } from '@features/company-list/lib/companyListLoader.ts';
+import { contractListLoader } from '@features/contract-list/lib/contractListLoader.ts';
 
-import { clientDetailsLoader } from '@entities/clients/api/clientDetailsLoader.ts';
-import { companyDetailsLoader } from '@entities/companies/api/companyDetailsLoader.ts';
-import { contractDetailsLoader } from '@entities/contracts/api/contractDetailsLoader.ts';
+import { clientDetailsLoader } from '@entities/clients/lib/clientDetailsLoader.ts';
+import { companyDetailsLoader } from '@entities/companies/lib/companyDetailsLoader.ts';
+import { contractDetailsLoader } from '@entities/contracts/lib/contractDetailsLoader.ts';
 
 const routes: RouteObject[] = [
   {
