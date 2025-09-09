@@ -1,6 +1,6 @@
 import { observer } from 'mobx-react';
 
-import EntityDetails from '@widgets/EditableItem';
+import EditableItem from '@widgets/EditableItem';
 
 import { detailsDataTransformer } from '@entities/entity/lib/helpers';
 import settingsStore from '@entities/settings/model/settings.store.ts';
@@ -39,5 +39,5 @@ export const SettingsPage: React.FC = observer(() => {
     }
   );
 
-  return <EntityDetails isHeader={false} data={data} />;
+  return <EditableItem isHeader={false} data={data} />;
 });
