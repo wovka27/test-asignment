@@ -1,5 +1,3 @@
-import { observer } from 'mobx-react';
-
 import type { EntityDetailsProps } from '@widgets/EditableItem/model';
 import Header from '@widgets/Header';
 

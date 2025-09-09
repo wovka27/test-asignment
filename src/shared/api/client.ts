@@ -8,7 +8,7 @@ export const client = new HttpClient({
   baseURL: import.meta.env.VITE_API_URL,
   responseType: 'json',
   setAuthenticated: (v) => authStore.setIsAuthenticated(v),
-  onError: (code?: string, count?: number) => {
+  onError: (code?: string) => {
     toast.error(code);
   },
 });

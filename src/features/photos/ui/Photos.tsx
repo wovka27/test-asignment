@@ -1,6 +1,5 @@
 import { type ChangeEvent, useCallback, useRef } from 'react';
 
-import clsx from 'clsx';
 import { observer } from 'mobx-react';
 
 import { modalStateConfigMap } from '@app/providers/modal/lib/modalRegistry.ts';
@@ -70,17 +69,15 @@ const ImagePreviewList: React.FC<{
 
   return (
     <SectionContainer.Body>
-      <GrabScrollContainer>
-        <div className={clsx('photos__list')}>
-          {list.map((i, index) => (
-            <ImagePreview
-              src={i.filepath}
-              key={i.filepath + index + i.filepath + i.createdAt}
-              alt={i.name}
-              onRemove={remove(i)}
-            />
-          ))}
-        </div>
+      <GrabScrollContainer className="photos__list">
+        {list.map((i, index) => (
+          <ImagePreview
+            src={i.filepath}
+            key={i.filepath + index + i.filepath + i.createdAt}
+            alt={i.name}
+            onRemove={remove(i)}
+          />
+        ))}
       </GrabScrollContainer>
     </SectionContainer.Body>
   );
