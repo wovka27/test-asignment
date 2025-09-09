@@ -69,7 +69,7 @@ const ImagePreviewList: React.FC<{
 
   return (
     <SectionContainer.Body>
-      <GrabScrollContainer className="photos__list">
+      <GrabScrollContainer wheelEvent className="photos__list">
         {list.map((i, index) => (
           <ImagePreview
             src={i.filepath}
